@@ -1,0 +1,52 @@
+            $table->increments('idPelanggan');
+            $table->string('namaPelanggan');
+            $table->string('alamat');
+            $table->string('noHP');
+            $table->date('tanggalPasang');
+            $table->string('kodeMeter');
+            $table->timestamps();
+
+            2021_01_30_162622_create_pelanggan_table
+
+            $table->id();
+            // $table->integer('pegawai_id')->unsigned();
+            // $table->foreign('pegawai_id')->references('idPegawai')->on('pegawais')->onUpdate('cascade');
+            $table->string('name');
+            $table->string('password');
+            $table->string('username');
+            $table->rememberToken();
+            $table->timestamps();
+
+            2014_10_12_000000_create_users_table
+
+            //pegawai
+            $table->increments('idPegawai');
+            $table->string('namaPegawai');
+            $table->string('alamat');
+            $table->string('noHP');
+            $table->timestamps();
+
+            2021_02_01_151215_create_pegawais_table
+
+            //golongan
+            $table->increments('idGolongan');
+            $table->string('kode');
+            $table->string('namaGolongan');
+            $table->integer('tarif');
+            $table->timestamps();
+
+            //tagihan
+            $table->increments('idTagihan');
+            $table->integer('pelanggan_id')->unsigned();
+            $table->foreign('pelanggan_id')->references('idPelanggan')->on('pelanggan')->onUpdate('cascade');
+            $table->integer('pegawai_id')->unsigned();
+            $table->foreign('pegawai_id')->references('idPegawai')->on('pegawai')->onUpdate('cascade');
+            $table->integer('golongan_id')->unsigned();
+            $table->foreign('golongan_id')->references('idGolongan')->on('golongan')->onUpdate('cascade');
+            $table->date('tanggalCatat');
+            $table->string('tahun');
+            $table->string('bulan');
+            $table->integer('jumlahMeter');
+            $table->string('fotoMeteran');
+            $table->integer('subTotal');
+            $table->timestamps();
