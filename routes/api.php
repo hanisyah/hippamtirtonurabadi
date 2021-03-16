@@ -18,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::post('login', 'Api\LoginController@login');
+/*Route::apiResource('pelanggan', 'Api\PelangganController')->names([
+    'index' => 'pelanggan-api.index',
+    'store' => 'pelanggan-api.store',
+])->only(['index', 'store']);*/
+Route::post('pelanggan', 'Api\PelangganController@index');

@@ -23,5 +23,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/golongan','GolonganController');
     Route::resource('/tagihan','TagihanController');
     Route::resource('/user','UserController');
+    Route::resource('/totaltagihan','TotalTagihanController');
 });
 

@@ -82,6 +82,9 @@
               <a href="{{url('/tagihan/')}}" class="nav-link"><i data-feather="briefcase"></i><span>Tagihan</span></a>
             </li>
             <li class="dropdown">
+              <a href="{{url('/totaltagihan/')}}" class="nav-link"><i data-feather="dollar-sign"></i><span>Total Tagihan</span></a>
+            </li>
+            <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="layout"></i><span>Laporan</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="forms-advanced-form.html">Laporan Masuk</a></li>

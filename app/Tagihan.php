@@ -8,7 +8,7 @@ class Tagihan extends Model
 {
     protected $table = 'tagihan';
     protected $primaryKey = 'idTagihan';
-    protected $fillable = ['pelanggan_id','pegawai_id','golongan_id','tanggalCatat','tahun','bulan','jumlahMeter','fotoMeteran','subTotal'];
+    protected $fillable = ['pelanggan_id','pegawai_id','golongan_id','tanggalCatat','tahun','bulan','jumlahMeter','fotoMeteran'];
 
     public function pelanggan(){
     	return $this->belongsTo('App\Pelanggan','pelanggan_id');
