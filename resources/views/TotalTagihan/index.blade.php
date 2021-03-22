@@ -22,8 +22,8 @@
                     <th>Nama Pelanggan</th>
                     <th>Tahun</th>
                     <th>Bulan</th>
+                    <th>Golongan</th>
                     <th>Jumlah Meteran</th>
-                    {{-- <th>Golongan</th> --}}
                     <th>Foto Meteran</th>
                     <th>Sub Total</th>
                     <th>Petugas Pencatat</th>

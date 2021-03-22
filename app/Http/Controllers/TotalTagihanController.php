@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TotalTagihan;
+use App\Tagihan;
 use Illuminate\Http\Request;
 
 class TotalTagihanController extends Controller
@@ -15,7 +16,8 @@ class TotalTagihanController extends Controller
     public function index()
     {
         $totaltagihan = TotalTagihan::all();
-        return view ('totaltagihan.index', compact('totaltagihan'));
+        $tagihan = Tagihan::all();
+        return view ('totaltagihan.index', compact('totaltagihan','tagihan'));
     }
 
     /**

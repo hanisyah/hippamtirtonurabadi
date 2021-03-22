@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Tagihan;
 use App\Pelanggan;
+use App\Pegawai;
+use App\Golongan;
 use Illuminate\Http\Request;
 
 class TagihanController extends Controller
@@ -50,8 +52,7 @@ class TagihanController extends Controller
      */
     public function show(Tagihan $tagihan)
     {
-        $tagihan = Tagihan::find($tagihan->idTagihan);
-        return view('detailtagihan.index', compact('tagihan'));
+        //
     }
 
     /**
@@ -62,7 +63,11 @@ class TagihanController extends Controller
      */
     public function edit(Tagihan $tagihan)
     {
-        //
+        $tagihan = Tagihan::find($tagihan->idTagihan);
+        $pelanggan = Pelanggan::all();
+        $pegawai = Pegawai::all();
+        $golongan = Golongan::all();
+        return view('tagihan.update', compact('tagihan','pelanggan','pegawai','golongan'));
     }
 
     /**
@@ -74,7 +79,18 @@ class TagihanController extends Controller
      */
     public function update(Request $request, Tagihan $tagihan)
     {
-        //
+        Tagihan::where('idTagihan', $tagihan->idTagihan)
+            ->update([
+                'pelanggan_id' => $request->idPelanggan,
+                'pegawai_id' => $request->idPegawai,
+                'golongan_id' => $request->idGolongan,
+                'tanggalCatat' => $request->tanggalCatat,
+                'tahun' => $request->tahun,
+                'bulan' => $request->bulan,
+                'jumlahMeter' => $request->jumlahMeter,
+                'fotoMeteran' => $request->fotoMeteran
+            ]);
+        return redirect('/tagihan')->with(['success' => 'Data Tagihan Berhasil Diubah!']);
     }
 
     /**

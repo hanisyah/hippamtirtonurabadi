@@ -17,6 +17,7 @@ class CreateTotaltagihanTable extends Migration
             $table->increments('idTotalTagihan');
             $table->integer('tagihan_id')->unsigned();
             $table->foreign('tagihan_id')->references('idTagihan')->on('tagihan')->onUpdate('cascade');
+            $table->integer('subTotal');
             $table->timestamps();
         });
     }
