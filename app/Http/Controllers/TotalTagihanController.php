@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\TotalTagihan;
 use App\Tagihan;
+use App\Pegawai;
+use App\Pelanggan;
+use App\Golongan;
 use Illuminate\Http\Request;
+use PDF;
 
 class TotalTagihanController extends Controller
 {
@@ -17,7 +21,10 @@ class TotalTagihanController extends Controller
     {
         $totaltagihan = TotalTagihan::all();
         $tagihan = Tagihan::all();
-        return view ('totaltagihan.index', compact('totaltagihan','tagihan'));
+        $pegawai = Pegawai::all();
+        $pelanggan = Pelanggan::all();
+        $golongan = Golongan::all();
+        return view ('totaltagihan.index', compact('totaltagihan','tagihan','pegawai','pelanggan','golongan'));
     }
 
     /**
@@ -84,5 +91,16 @@ class TotalTagihanController extends Controller
     public function destroy(TotalTagihan $totalTagihan)
     {
         //
+    }
+
+    // Cetak Tagihan
+    public function generatePDF()
+
+    {
+        $data = ['title' => 'Struk Tagihan Meter Air'];
+
+        $pdf = PDF::loadView('TotalTagihan/strukPDF', $data);
+        // return $pdf->download('totaltagihan-pdf.pdf');
+        return $pdf->stream();
     }
 }

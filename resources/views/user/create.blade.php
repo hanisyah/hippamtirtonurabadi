@@ -16,7 +16,7 @@
                         <div class="col-sm-12 col-md-7">
                             {{-- <input type="text" class="form-control" id="namaPelanggan" name="namaPelanggan" placeholder="Nama Pelanggan"> --}}
                             <select class="form-control" placeholder="-- Select Nama Pegawai --" id="idPegawai" name="idPegawai"  required>
-
+                                <option value selected="selected">-- Pilih Pegawai --</option>
                                 @foreach ($pegawai as $pgw)
                                     <option value="{{$pgw->idPegawai}}">{{$pgw->namaPegawai}}</option>
                                 @endforeach

@@ -13,4 +13,7 @@ class Pelanggan extends Model
     public function tagihans(){
     	return $this->hasMany('App\Tagihan','pelanggan_id');
     }
+    public function golongan(){
+    	return $this->belongsTo('App\Golongan','golongan_id');
+    }
 }

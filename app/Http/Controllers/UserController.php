@@ -40,6 +40,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         User::create([
             'pegawai_id' => $request->idPegawai,
             'username' => $request->username,

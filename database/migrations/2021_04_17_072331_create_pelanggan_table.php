@@ -15,6 +15,8 @@ class CreatePelangganTable extends Migration
     {
         Schema::create('pelanggan', function (Blueprint $table) {
             $table->increments('idPelanggan');
+            $table->integer('golongan_id')->unsigned();
+            $table->foreign('golongan_id')->references('idGolongan')->on('golongan')->onUpdate('cascade');
             $table->string('namaPelanggan');
             $table->string('alamat');
             $table->string('noHP');

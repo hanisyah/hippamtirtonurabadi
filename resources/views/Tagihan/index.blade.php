@@ -35,9 +35,12 @@
                     <td>{{ $tag->golongan->namaGolongan }}</td>
                     <td>{{ $tag->tahun }}</td>
                     <td>{{ $tag->bulan }}</td>
-                    <td>{{ $tag->tanggalCatat }}</td>
+                    <td>{{ Carbon\Carbon::parse($tag->tanggalCatat)->translatedFormat('l, d F Y') }}</td>
                     <td>{{ $tag->jumlahMeter }}</td>
-                    <td>{{ $tag->fotoMeteran }}</td>
+                    <td>
+                        {{-- <img src="{{ asset ( $tag->fotoMeteran ) }}" width="100"> --}}
+                        <a href="{{ asset('img/'. $tag->fotoMeteran) }}" target="_blank" rel="noopener noreferrer">Lihat Meter Air</a>
+                    </td>
                     <td>{{ $tag->pegawai->namaPegawai }}</td>
                     <td>
                         <a href="{{ url('/tagihan/'.$tag->idTagihan.'/edit') }}" class="on-default edit-row btn btn-primary" ><i class="fa fa-edit"></i></a>

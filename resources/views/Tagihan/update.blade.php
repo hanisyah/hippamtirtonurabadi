@@ -87,7 +87,12 @@
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Foto Meteran</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="fotoMeteran" name="fotoMeteran" placeholder="Foto Meteran" value="{{ $tagihan->fotoMeteran }}" required>
+                            {{-- <input type="text" class="form-control" id="fotoMeteran" name="fotoMeteran" placeholder="Foto Meteran" value="{{ $tagihan->fotoMeteran }}" required> --}}
+                            {{-- <img src="" id="profile-img-tag" width="200px" /> --}}
+                            {{-- <img src="{{ asset('img/'. $tagihan->fotoMeteran) }}" height="60%" width="30%">
+                            <input type="file" name="fotoMeteran" id="fotoMeteran" class="form-control" required> --}}
+                            <input onchange="loadFile(event)" type="file" class="filestyle" name="fotoMeteran" id="fotoMeteran" value="{{ $tagihan->fotoMeteran }}" data-iconname="fa fa-cloud-upload">
+                            <img src="{{ asset('/img/'.$tagihan->fotoMeteran) }}" id="output" width="200">
                         </div>
                     </div>
                     <div class="form-group row mb-4">
@@ -119,5 +124,12 @@
         </div>
     </div>
 </section>
+
+<script>
+    var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
 
 @endsection

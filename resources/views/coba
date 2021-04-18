@@ -9,9 +9,9 @@
             2021_01_30_162622_create_pelanggan_table
 
             $table->id();
-            // $table->integer('pegawai_id')->unsigned();
-            // $table->foreign('pegawai_id')->references('idPegawai')->on('pegawais')->onUpdate('cascade');
-            $table->string('name');
+            $table->integer('pegawai_id')->unsigned();
+            $table->foreign('pegawai_id')->references('idPegawai')->on('pegawai')->onUpdate('cascade');
+            // $table->string('name');
             $table->string('password');
             $table->string('username');
             $table->rememberToken();
@@ -48,5 +48,11 @@
             $table->string('bulan');
             $table->integer('jumlahMeter');
             $table->string('fotoMeteran');
+            $table->timestamps();
+
+            //totaltagihan
+            $table->increments('idTotalTagihan');
+            $table->integer('tagihan_id')->unsigned();
+            $table->foreign('tagihan_id')->references('idTagihan')->on('tagihan')->onUpdate('cascade');
             $table->integer('subTotal');
             $table->timestamps();

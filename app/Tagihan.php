@@ -22,7 +22,7 @@ class Tagihan extends Model
     	return $this->belongsTo('App\Golongan','golongan_id');
     }
 
-    // public function detailtagihan(){
-    // 	return $this->belongsTo('App\DetailTagihan','detailtagihan_id');
-    // }
+    public function totaltagihans(){
+    	return $this->hasmany('App\TotalTagihan','tagihan_id');
+    }
 }

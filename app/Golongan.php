@@ -14,4 +14,8 @@ class Golongan extends Model
     	return $this->hasMany('App\Tagihan','golongan_id');
     }
 
+    public function pelanggans(){
+    	return $this->hasMany('App\Pelanggan','golongan_id');
+    }
+
 }

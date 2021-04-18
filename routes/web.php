@@ -17,12 +17,14 @@ Route::get('/', 'RedirectIfAuthenticatedController');
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource('/petugas','PetugasController');
+    // Route::resource('/petugas','PetugasController');
     Route::resource('/pegawai','PegawaiController');
     Route::resource('/pelanggan','PelangganController');
+    Route::post('/pelanggan/{pelanggan}/qrcode','PelangganController@qrcode');
     Route::resource('/golongan','GolonganController');
     Route::resource('/tagihan','TagihanController');
     Route::resource('/user','UserController');
     Route::resource('/totaltagihan','TotalTagihanController');
+    Route::get('/totaltagihan-pdf','TotalTagihanController@generatePDF');
 });
 

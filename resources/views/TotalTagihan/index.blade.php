@@ -26,26 +26,29 @@
                     <th>Jumlah Meteran</th>
                     <th>Foto Meteran</th>
                     <th>Sub Total</th>
-                    <th>Petugas Pencatat</th>
+                    <th>Pegawai Pencatat</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($tagihan as $tag)
+                    @foreach($totaltagihan as $tag)
                     <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $tag->pelanggan->kodeMeter }}</td>
-                    <td>{{ $tag->pelanggan->namaPelanggan }}</td>
+                    <td>{{ $tag->kodeMeter }}</td>
+                    <td>{{ $tag->namaPelanggan }}</td>
+                    <td>{{ $tag->tagihan->tahun }}</td>
+                    <td>{{ $tag->tagihan->bulan }}</td>
+                    <td>{{ $tag->namaGolongan }}</td>
+                    <td>{{ $tag->tagihan->jumlahMeter }}</td>
+                    <td>{{ $tag->tagihan->fotoMeteran }}</td>
+                    <td>{{ $tag->subTotal }}</td>
+                    <td>{{ $tag->namaPegawai }}</td>
                     <td>
-                        <a href="{{ url('/tagihan/'.$tag->idTagihan) }}" class="on-default edit-row btn btn-primary" ><i class="fa fa-info"></i></a>
-                        <form action="" method="post" class="d-inline">
-                        @method('delete')
-                        @csrf
-                        <button class="on-default edit-row btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus nya?');" ><i class="fa fa-trash"></i></button>
-                        </form>
+                        <a href="{{ url('/totaltagihan-pdf/'.$tag->idTagihan) }}" target="_blank" rel="noopener noreferrer" class="on-default edit-row btn btn-primary" ><i class="fa fa-info"></i></a>
+
                     </td>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
                 </table>
             </div>

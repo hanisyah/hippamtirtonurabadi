@@ -94,4 +94,8 @@ class PelangganController extends Controller
         Pelanggan::destroy($pelanggan->idPelanggan);
         return redirect('/pelanggan')->with(['success' => 'Data Pelanggan Berhasil Dihapus!']);
     }
+
+    public function qrcode() {
+
+    }
 }

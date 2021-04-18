@@ -7,6 +7,8 @@ use App\Pelanggan;
 use App\Pegawai;
 use App\Golongan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Ramsey\Uuid\Uuid;
 
 class TagihanController extends Controller
 {
@@ -79,17 +81,49 @@ class TagihanController extends Controller
      */
     public function update(Request $request, Tagihan $tagihan)
     {
-        Tagihan::where('idTagihan', $tagihan->idTagihan)
-            ->update([
-                'pelanggan_id' => $request->idPelanggan,
-                'pegawai_id' => $request->idPegawai,
-                'golongan_id' => $request->idGolongan,
-                'tanggalCatat' => $request->tanggalCatat,
-                'tahun' => $request->tahun,
-                'bulan' => $request->bulan,
-                'jumlahMeter' => $request->jumlahMeter,
-                'fotoMeteran' => $request->fotoMeteran
-            ]);
+        // dd($request->all());
+        // $tagihan = Tagihan::find($tagihan->idTagihan);
+        // $nm = $request->fotoMeteran;
+        // $namaFile = $nm->getClientOriginalName();
+
+        // $data = [
+        //         'pelanggan_id' => $request->idPelanggan,
+        //         'pegawai_id' => $request->idPegawai,
+        //         'golongan_id' => $request->idGolongan,
+        //         'tanggalCatat' => $request->tanggalCatat,
+        //         'tahun' => $request->tahun,
+        //         'bulan' => $request->bulan,
+        //         'jumlahMeter' => $request->jumlahMeter,
+        //         'fotoMeteran' => $nm
+        // ];
+        // $request->fotoMeteran->move(public_path().'/img/', $nm);
+        // $tagihan->update($data);
+
+        $data = $request->except(['fotoMeteran']);
+
+        if ($request->hasFile('fotoMeteran')) {
+            $extension = $request->fotoMeteran->extension();
+            $filename = Uuid::uuid4() . ".{$extension}";
+            $oldfile = basename($tagihan->fotoMeteran);
+            Storage::delete("tagihan/{$oldfile}");
+            $request->fotoMeteran->storeAs('tagihan', $filename);
+            $data['fotoMeteran'] = asset("/storage/tagihan/{$filename}");
+        }
+
+        $tagihan->fill($data);
+        $tagihan->save();
+
+        // Tagihan::where('idTagihan', $tagihan->idTagihan)
+        //     ->update([
+        //         'pelanggan_id' => $request->idPelanggan,
+        //         'pegawai_id' => $request->idPegawai,
+        //         'golongan_id' => $request->idGolongan,
+        //         'tanggalCatat' => $request->tanggalCatat,
+        //         'tahun' => $request->tahun,
+        //         'bulan' => $request->bulan,
+        //         'jumlahMeter' => $request->jumlahMeter,
+        //         'fotoMeteran' => $request->fotoMeteran
+        //     ]);
         return redirect('/tagihan')->with(['success' => 'Data Tagihan Berhasil Diubah!']);
     }
 
@@ -103,4 +137,5 @@ class TagihanController extends Controller
     {
         //
     }
+
 }
