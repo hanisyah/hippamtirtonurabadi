@@ -97,7 +97,7 @@ class TotalTagihanController extends Controller
     public function generatePDF()
 
     {
-        $data = ['title' => 'Struk Tagihan Meter Air'];
+        $data = ['title' => 'Struk Pembayaran Rekening Air'];
 
         $pdf = PDF::loadView('TotalTagihan/strukPDF', $data);
         // return $pdf->download('totaltagihan-pdf.pdf');

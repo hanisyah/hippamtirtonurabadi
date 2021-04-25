@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pelanggan;
+use App\Golongan;
 use Illuminate\Http\Request;
 
 class PelangganController extends Controller
@@ -15,7 +16,8 @@ class PelangganController extends Controller
     public function index()
     {
         $pelanggan = Pelanggan::all();
-        return view ('pelanggan.index', compact('pelanggan'));
+        $golongan = Golongan::all();
+        return view ('pelanggan.index', compact('pelanggan','golongan'));
     }
 
     /**
@@ -25,7 +27,8 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        return view('pelanggan.create');
+        $golongan = Golongan::all();
+        return view('pelanggan.create', compact('golongan'));
     }
 
     /**
@@ -36,7 +39,14 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        Pelanggan::create($request->all());
+        Pelanggan::create([
+            'golongan_id' => $request->idGolongan,
+            'namaPelanggan' => $request->namaPelanggan,
+            'alamat' => $request->alamat,
+            'noHP' => $request->noHP,
+            'tanggalPasang' => $request->tanggalPasang,
+            'kodeMeter' => $request->kodeMeter
+        ]);
         return redirect('/pelanggan')->with(['success' => 'Data Pelanggan Berhasil Ditambahkan!']);
     }
 
@@ -60,7 +70,8 @@ class PelangganController extends Controller
     public function edit(Pelanggan $pelanggan)
     {
         $pelanggan = Pelanggan::find($pelanggan->idPelanggan);
-        return view('pelanggan.update', compact('pelanggan'));
+        $golongan = Golongan::all();
+        return view('pelanggan.update', compact('pelanggan','golongan'));
     }
 
     /**

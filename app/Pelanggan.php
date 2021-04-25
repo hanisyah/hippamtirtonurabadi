@@ -8,7 +8,7 @@ class Pelanggan extends Model
 {
     protected $table = 'pelanggan';
     protected $primaryKey = 'idPelanggan';
-    protected $fillable = ['namaPelanggan','alamat','noHP','tanggalPasang','kodeMeter'];
+    protected $fillable = ['golongan_id','namaPelanggan','alamat','noHP','tanggalPasang','kodeMeter'];
 
     public function tagihans(){
     	return $this->hasMany('App\Tagihan','pelanggan_id');

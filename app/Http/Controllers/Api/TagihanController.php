@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 
 class TagihanController extends Controller
 {
-    public function create(Request $request)
-    {
+    public function create(Request $request){
         $tagihan =  Tagihan::create([
             'pelanggan_id' => $request->idPelanggan,
             'pegawai_id' => $request->idPegawai,
@@ -20,9 +19,25 @@ class TagihanController extends Controller
             'jumlahMeter' => $request->jumlahMeter,
             'fotoMeteran' => $request->fotoMeteran
         ]);
-        $response["tagihan"] = $tagihan;
+        $response = $tagihan;
         $response["success"] = 1;
         return response()->json($response);
 
+    }
+
+    public function add(Request $request){
+        $tagihan = new Tagihan;
+        $tagihan->pelanggan_id = $request->idPelanggan;
+        $tagihan->pegawai_id = $request->idPegawai;
+        $tagihan->golongan_id = $request->idGolongan;
+        $tagihan->tahun = $request->tahun;
+        $tagihan->bulan = $request->bulan;
+        $tagihan->tanggalCatat = $request->tanggalCatat;
+        $tagihan->jumlahMeter = $request->jumlahMeter;
+        $tagihan->fotoMeteran = $request->fotoMeteran;
+        $tagihan->save();
+
+        $response["success"] = 1;
+        return response()->json($response);
     }
 }

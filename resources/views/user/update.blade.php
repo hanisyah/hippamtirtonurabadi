@@ -13,7 +13,7 @@
                 <form action="{{url('/user/'.$user->id)}}" method="post">
                     @csrf
                     @method('patch')
-                    <input type="hidden" name="idPelanggan" id="idPelanggan">
+                    <input type="hidden" name="id" id="id">
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Pegawai</label>
                         <div class="col-sm-12 col-md-7">
