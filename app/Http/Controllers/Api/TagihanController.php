@@ -37,7 +37,16 @@ class TagihanController extends Controller
         error_reporting(-1);
         ini_set('display_errors', 'On');
         $nm = $request->fotoMeteran;
-        //$namaFile = time().rand(100,999).".".$nm->getClientOriginalExtension();
+
+        $golongan = Golongan::where('idGolongan',$request->idGolongan)->first();
+
+        $tagihan_sebelumnya = Tagihan::orderBy('idTagihan','desc')->where('pelanggan_id',$request->idPelanggan)->take(1)->get()[0];
+
+      
+        $jumlah_meter = $request->jumlahMeter - $tagihan_sebelumnya->jumlahMeter;
+
+        $nominal_tagihan = $golongan->tarif * $jumlah_meter;
+
 
         $tagihan = new Tagihan;
         $tagihan->pelanggan_id = $request->idPelanggan;
@@ -47,15 +56,18 @@ class TagihanController extends Controller
         $tagihan->bulan = $request->bulan;
         $tagihan->tanggalCatat = $request->tanggalCatat;
         $tagihan->jumlahMeter = $request->jumlahMeter;
-
         $tagihan->fotoMeteran = $nm;
-        //$nm->move(public_path().'/img', $namaFile);
-
         $tagihan->save();
+
+        $total_tagihan = new TotalTagihan();
+        $total_tagihan->tagihan_id = $tagihan->idTagihan;
+        $total_tagihan->subTotal   = $nominal_tagihan;
 
         $response["success"] = 1;
         return response()->json($response, 201);
     }
+
+
     public function uploadImage(Request $request){
         error_reporting(-1);
         ini_set('display_errors', 'On');
