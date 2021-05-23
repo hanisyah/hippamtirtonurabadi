@@ -17,6 +17,7 @@
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="{{url('otika/assets/css/custom.css')}}">
   <link rel='shortcut icon' type='image/x-icon' href="{{url('otika/assets/img/water.ico')}}" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 
 <body>
@@ -210,6 +211,7 @@
     </div>
   </div>
   <!-- General JS Scripts -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
   <script src="{{url('otika/assets/js/app.min.js')}}"></script>
   <!-- JS Libraies -->
   <!-- Page Specific JS File -->
@@ -221,12 +223,15 @@
   <script src="{{url('otika/assets/bundles/datatables/export-tables/pdfmake.min.js')}}"></script>
   <script src="{{url('otika/assets/bundles/datatables/export-tables/vfs_fonts.js')}}"></script>
   <script src="{{url('otika/assets/bundles/datatables/export-tables/buttons.print.min.js')}}"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
   <script src="{{url('otika/assets/js/page/datatables.js')}}"></script>
   <!-- Template JS File -->
   <script src="{{url('otika/assets/js/scripts.js')}}"></script>
   <!-- Custom JS File -->
   <script src="{{url('otika/assets/js/custom.js')}}"></script>
-
+  @yield('js')
     {{-- <script>
         var loadFile = function(event) {
             var output = document.getElementById('output');

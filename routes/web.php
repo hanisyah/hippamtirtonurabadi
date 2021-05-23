@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +11,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/tes',function(){
+    $path = public_path('\tes.pdf');
+    $file = file_get_contents('tes.pdf',$path);
+
+   $tes = \Wablass::send_document([
+        'phone'=>'08987499383',
+        'document'=>$file,
+        'caption'=>'tes',
+    ]);
+
+    dd($tes);
+});
 
 Route::get('/', 'RedirectIfAuthenticatedController');
 Auth::routes();

@@ -9,6 +9,7 @@ use App\Golongan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
+use Carbon\Carbon;
 
 class TagihanController extends Controller
 {
@@ -17,11 +18,30 @@ class TagihanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tagihan = Tagihan::all();
-        $pelanggan = Pelanggan::all();
-        return view ('tagihan.index', compact('tagihan','pelanggan'));
+        //dd($request);
+
+
+        $tagihan = Tagihan::with('pelanggan');
+
+        if(isset($request->dates)){
+            if(!empty($request->dates)){
+                $dates = explode('-',$request->dates);
+                $start = Carbon::parse($dates[0])->toDateTimeString();
+                $end   = Carbon::parse($dates[1])->toDateTimeString();
+
+                $from = explode(' ',$start)[0].' 00:00:00';
+                $to   = explode(' ',$end)[0].' 23:59:59';
+                $tagihan = $tagihan->whereBetween('created_at',[$from,$to]);
+            }
+        }
+        $tagihan = $tagihan->orderby('idTagihan','desc')->get();
+
+
+        //$tagihan = Tagihan::paginate(10);
+        //$pelanggan = Pelanggan::paginate(10);
+        return view ('tagihan.index', compact('tagihan'));
     }
 
     /**

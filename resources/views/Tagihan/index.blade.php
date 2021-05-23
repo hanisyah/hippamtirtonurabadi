@@ -9,6 +9,11 @@
             </div>
 
             <div class="card-body">
+            <form action="{{url('/tagihan')}}" id="form_range" method="get">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="dates" />
+                </div>
+            </form>
             <div class="table-responsive">
                 <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
                 <thead>
@@ -59,4 +64,13 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+<script>
+
+$('input[name="dates"]').daterangepicker();
+$('input[name="dates"]').on('apply.daterangepicker', function() {
+  $('#form_range').submit();
+});
+</script>
 @endsection
