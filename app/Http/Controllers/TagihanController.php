@@ -155,7 +155,8 @@ class TagihanController extends Controller
      */
     public function destroy(Tagihan $tagihan)
     {
-        //
+        Tagihan::destroy($tagihan->idTagihan);
+        return redirect('/tagihan')->with(['success' => 'Data Tagihan Berhasil Dihapus!']);
     }
 
 }

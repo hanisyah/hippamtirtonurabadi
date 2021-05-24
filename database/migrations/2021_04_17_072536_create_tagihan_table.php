@@ -25,6 +25,7 @@ class CreateTagihanTable extends Migration
             $table->string('tahun');
             $table->string('bulan');
             $table->integer('jumlahMeter');
+            $table->integer('jumlah_meter_kemarin');
             $table->string('fotoMeteran');
             $table->timestamps();
         });

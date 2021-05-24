@@ -7,6 +7,7 @@ use App\Tagihan;
 use App\Golongan;
 use App\Pelanggan;
 use App\Pegawai;
+use App\TotalTagihan;
 Use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -38,33 +39,42 @@ class TagihanController extends Controller
         ini_set('display_errors', 'On');
         $nm = $request->fotoMeteran;
 
-        $golongan = Golongan::where('idGolongan',$request->idGolongan)->first();
+        try{
+            $golongan = Golongan::where('idGolongan',$request->idGolongan)->first();
 
-        $tagihan_sebelumnya = Tagihan::orderBy('idTagihan','desc')->where('pelanggan_id',$request->idPelanggan)->take(1)->get()[0];
-
-      
-        $jumlah_meter = $request->jumlahMeter - $tagihan_sebelumnya->jumlahMeter;
-
-        $nominal_tagihan = $golongan->tarif * $jumlah_meter;
+            $tagihan_sebelumnya = Tagihan::orderBy('idTagihan','desc')->where('pelanggan_id',$request->idPelanggan)->take(1)->get()[0];
 
 
-        $tagihan = new Tagihan;
-        $tagihan->pelanggan_id = $request->idPelanggan;
-        $tagihan->pegawai_id = $request->idPegawai;
-        $tagihan->golongan_id = $request->idGolongan;
-        $tagihan->tahun = $request->tahun;
-        $tagihan->bulan = $request->bulan;
-        $tagihan->tanggalCatat = $request->tanggalCatat;
-        $tagihan->jumlahMeter = $request->jumlahMeter;
-        $tagihan->fotoMeteran = $nm;
-        $tagihan->save();
+            $jumlah_meter = $request->jumlahMeter - $tagihan_sebelumnya->jumlahMeter;
 
-        $total_tagihan = new TotalTagihan();
-        $total_tagihan->tagihan_id = $tagihan->idTagihan;
-        $total_tagihan->subTotal   = $nominal_tagihan;
+            $nominal_tagihan = $golongan->tarif * $jumlah_meter;
 
-        $response["success"] = 1;
-        return response()->json($response, 201);
+
+            $tagihan = new Tagihan;
+            $tagihan->pelanggan_id = $request->idPelanggan;
+            $tagihan->pegawai_id = $request->idPegawai;
+            $tagihan->golongan_id = $request->idGolongan;
+            $tagihan->tahun = $request->tahun;
+            $tagihan->bulan = $request->bulan;
+            $tagihan->tanggalCatat = $request->tanggalCatat;
+            $tagihan->jumlahMeter = $request->jumlahMeter;
+            $tagihan->jumlah_meter_kemarin = $tagihan_sebelumnya->jumlahMeter;
+            $tagihan->fotoMeteran = $nm;
+            $tagihan->save();
+
+            $total_tagihan = new TotalTagihan();
+            $total_tagihan->tagihan_id = $tagihan->idTagihan;
+            $total_tagihan->subTotal   = $nominal_tagihan;
+            $total_tagihan->save();
+
+            $response["success"] = 1;
+            return response()->json($response, 201);
+        }catch(\Exception $e){
+            \Log::error($e);
+            $response["success"] = 0;
+            return response()->json($response, 500);
+        }
+
     }
 
 

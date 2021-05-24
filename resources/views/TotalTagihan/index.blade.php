@@ -22,29 +22,27 @@
                     <th>Nama Pelanggan</th>
                     <th>Tahun</th>
                     <th>Bulan</th>
-                    <th>Golongan</th>
+                    <th>Tarif Golongan</th>
+                    <th>Jumlah Meteran Kemarin</th>
                     <th>Jumlah Meteran</th>
-                    <th>Foto Meteran</th>
                     <th>Sub Total</th>
-                    <th>Pegawai Pencatat</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($totaltagihan as $tag)
+                    @foreach($totalTagihan as $tag)
                     <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $tag->kodeMeter }}</td>
-                    <td>{{ $tag->namaPelanggan }}</td>
+                    <td>{{ $tag->tagihan->pelanggan->kodeMeter }}</td>
+                    <td>{{ $tag->tagihan->pelanggan->namaPelanggan }}</td>
                     <td>{{ $tag->tagihan->tahun }}</td>
                     <td>{{ $tag->tagihan->bulan }}</td>
-                    <td>{{ $tag->namaGolongan }}</td>
+                    <td>{{ $tag->tagihan->golongan->tarif }}</td>
+                    <td>{{ $tag->tagihan->jumlah_meter_kemarin }}</td>
                     <td>{{ $tag->tagihan->jumlahMeter }}</td>
-                    <td>{{ $tag->tagihan->fotoMeteran }}</td>
                     <td>{{ $tag->subTotal }}</td>
-                    <td>{{ $tag->namaPegawai }}</td>
                     <td>
-                        <a href="{{ url('/totaltagihan-pdf/'.$tag->idTagihan) }}" target="_blank" rel="noopener noreferrer" class="on-default edit-row btn btn-primary" ><i class="fa fa-info"></i></a>
+                        <a href="{{ url('/totaltagihan-pdf/'.$tag->idTotalTagihan) }}" target="_blank" rel="noopener noreferrer" class="on-default edit-row btn btn-primary" ><i class="fas fa-file-pdf"></i></a>
 
                     </td>
                     </tr>

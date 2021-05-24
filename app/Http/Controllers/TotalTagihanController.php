@@ -19,12 +19,17 @@ class TotalTagihanController extends Controller
      */
     public function index()
     {
-        $totaltagihan = TotalTagihan::all();
-        $tagihan = Tagihan::all();
-        $pegawai = Pegawai::all();
-        $pelanggan = Pelanggan::all();
-        $golongan = Golongan::all();
-        return view ('totaltagihan.index', compact('totaltagihan','tagihan','pegawai','pelanggan','golongan'));
+        // $totaltagihan = TotalTagihan::all();
+        // $tagihan = Tagihan::all();
+        // $pegawai = Pegawai::all();
+        // $pelanggan = Pelanggan::all();
+        // $golongan = Golongan::all();
+        $totalTagihan = TotalTagihan::with(['tagihan'=>function($q){
+            $q->with('pelanggan')
+              ->with('golongan')
+              ->with('pegawai');
+        }])->orderby('idTotalTagihan','desc')->get();
+        return view ('totaltagihan.index', compact('totalTagihan'));
     }
 
     /**
@@ -94,13 +99,17 @@ class TotalTagihanController extends Controller
     }
 
     // Cetak Tagihan
-    public function generatePDF()
+    public function generatePDF($idTotalTagihan)
 
     {
-        $data = ['title' => 'Struk Pembayaran Rekening Air'];
+        $data = TotalTagihan::with(['tagihan'=>function($q){
+            $q->with('pelanggan')
+              ->with('golongan')
+              ->with('pegawai');
+        }])->where('idTotalTagihan',$idTotalTagihan)->orderby('idTotalTagihan','desc')->first();
+        // dd($data);
 
-        $pdf = PDF::loadView('TotalTagihan/strukPDF', $data);
-        // return $pdf->download('totaltagihan-pdf.pdf');
+        $pdf = PDF::loadView('TotalTagihan/strukPDF', ['data' => $data])->setPaper('a5', 'landscape');
         return $pdf->stream();
     }
 }

@@ -99,3 +99,110 @@
           </ul>
         </aside>
       </div>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Struk Pembayaran Rekening Air</title>
+</head>
+<body>
+	<h3><center>Struk Pembayaran Rekening Air</center></h3>
+    <h4><center>HIPPAM Tirto Nur Abadi</center></h4>
+    {{-- <h4><center>Dsn. Basekan - Ds. Banjarsari Wetan</center></h4>
+    <h4><center>Kec. Dagangan - Kab. Madiun</center></h4> --}}
+	<br>
+	<br>
+
+	<table width="100%">
+		<tbody>
+
+            @foreach ($data as $dt)
+
+		    <tr>
+				<td width="20%">KODE METER</td>
+				<td width="2%">:</td>
+				<td width="30%">{{ $dt->tagihan->pelanggan->kodeMeter }}</td>
+				<td width="20%">GOL</td>
+				<td width="2%">:</td>
+				<td width="26%">{{ $dt->tagihan->golongan->namaGolongan }}</td>
+			</tr>
+		    <tr>
+				<td width="20%">NAMA</td>
+				<td width="2%">:</td>
+				<td width="30%">{{ $dt->tagihan->pelanggan->namaPelanggan }}</td>
+				<td width="20%">METER KINI</td>
+				<td width="2%">:</td>
+				<td width="26%">{{ $dt->tagihan->jumlahMeter }}</td>
+			</tr>
+		    <tr>
+				<td width="20%">ALAMAT</td>
+				<td width="2%">:</td>
+				<td width="30%">{{ $dt->tagihan->pelanggan->alamat }}</td>
+				{{-- <td width="20%">PEMAKAIAN</td>
+				<td width="2%">:</td>
+				<td width="26%">0</td> --}}
+			</tr>
+            <br>
+
+            @endforeach
+
+		</tbody>
+
+	</table>
+    <br>
+    <table width="100%">
+        <tbody>
+
+		    <tr>
+				<td width="20%">PERIODE</td>
+				<td width="2%">:</td>
+				<td width="30%">{{ $dt->tagihan->bulan }}</td>
+				<td width="20%"></td>
+				<td width="2%"></td>
+				<td width="26%"></td>
+			</tr>
+		    <tr>
+				<td width="20%">TAGIHAN AIR</td>
+				<td width="2%">:</td>
+				<td width="30%">{{ $dt->subTotal }}</td>
+				<td width="20%"></td>
+				<td width="2%"></td>
+				<td width="26%"></td>
+			</tr>
+		    {{-- <tr>
+				<td width="20%">DENDA</td>
+				<td width="2%">:</td>
+				<td width="30%">Rp. 0</td>
+				<td width="20%"></td>
+				<td width="2%"></td>
+				<td width="26%"></td>
+			</tr> --}}
+
+		</tbody>
+    </table>
+    <br>
+    <table width="100%">
+        <tbody>
+		    {{-- <tr>
+				<td width="20%">BIAYA ADMIN</td>
+				<td width="2%">:</td>
+				<td width="30%">Rp. 2000</td>
+				<td width="20%"></td>
+				<td width="2%"></td>
+				<td width="26%"></td>
+			</tr> --}}
+		    <tr>
+				<td width="20%">TOTAL TAGIHAN</td>
+				<td width="2%">:</td>
+				<td width="30%">{{ $dt->subTotal }}</td>
+				<td width="20%"></td>
+				<td width="2%"></td>
+				<td width="26%"></td>
+			</tr>
+		</tbody>
+    </table>
+
+</body>
+</html>

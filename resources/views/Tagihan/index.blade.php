@@ -25,6 +25,7 @@
                     <th>Tahun</th>
                     <th>Bulan</th>
                     <th>Tanggal Catat</th>
+                    <th>Jumlah Meteran Kemarin</th>
                     <th>Jumlah Meteran</th>
                     <th>Foto Meteran</th>
                     <th>Pegawai Pencatat</th>
@@ -41,6 +42,7 @@
                     <td>{{ $tag->tahun }}</td>
                     <td>{{ $tag->bulan }}</td>
                     <td>{{ Carbon\Carbon::parse($tag->tanggalCatat)->translatedFormat('l, d F Y') }}</td>
+                    <td>{{ $tag->jumlah_meter_kemarin }}</td>
                     <td>{{ $tag->jumlahMeter }}</td>
                     <td>
                         {{-- <img src="{{ asset ( $tag->fotoMeteran ) }}" width="100"> --}}
@@ -48,12 +50,12 @@
                     </td>
                     <td>{{ $tag->pegawai->namaPegawai }}</td>
                     <td>
-                        <a href="{{ url('/tagihan/'.$tag->idTagihan.'/edit') }}" class="on-default edit-row btn btn-primary" ><i class="fa fa-edit"></i></a>
-                        {{-- <form action="" method="post" class="d-inline">
+                        {{-- <a href="{{ url('/tagihan/'.$tag->idTagihan.'/edit') }}" class="on-default edit-row btn btn-primary" ><i class="fa fa-edit"></i></a> --}}
+                        <form action="{{ url('/tagihan/'.$tag->idTagihan) }}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
                         <button class="on-default edit-row btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus nya?');" ><i class="fa fa-trash"></i></button>
-                        </form> --}}
+                        </form>
                     </td>
                     </tr>
                     @endforeach
