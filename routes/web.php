@@ -16,10 +16,10 @@ Route::get('/tes',function(){
     $path = public_path('\tes.pdf');
     $file = file_get_contents('tes.pdf',$path);
 
-   $tes = \Wablass::send_document([
+   $tes = \Wablass::send_message([
         'phone'=>'08987499383',
-        'document'=>$file,
-        'caption'=>'tes',
+        'message'=>'tes',
+        //'caption'=>'tes',
     ]);
 
     dd($tes);
@@ -38,5 +38,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/user','UserController');
     Route::resource('/totaltagihan','TotalTagihanController');
     Route::get('/totaltagihan-pdf/{idTotalTagihan}','TotalTagihanController@generatePDF');
+    Route::get('/tagihanwa/{idTotalTagihan}','TotalTagihanController@sentToWhatsapp');
 });
 

@@ -9,6 +9,7 @@ use App\Pelanggan;
 use App\Golongan;
 use Illuminate\Http\Request;
 use PDF;
+use Wablass;
 
 class TotalTagihanController extends Controller
 {
@@ -106,10 +107,121 @@ class TotalTagihanController extends Controller
             $q->with('pelanggan')
               ->with('golongan')
               ->with('pegawai');
-        }])->where('idTotalTagihan',$idTotalTagihan)->orderby('idTotalTagihan','desc')->first();
-        // dd($data);
+        }])->where('idTotalTagihan',$idTotalTagihan)->first();
 
         $pdf = PDF::loadView('TotalTagihan/strukPDF', ['data' => $data])->setPaper('a5', 'landscape');
         return $pdf->stream();
+    }
+
+    public function sentToWhatsapp($idTotalTagihan)
+    {
+        $data = TotalTagihan::with(['tagihan'=>function($q){
+            $q->with('pelanggan')
+              ->with('golongan')
+              ->with('pegawai');
+        }])->where('idTotalTagihan',$idTotalTagihan)->first();
+
+        $nama_invoice = 'Invoice'.$data->idTotalTagihan.'-'.$data->created_at->format('Y-m-d').'.pdf';
+        $html = '<html>
+        <head>
+            <title>Struk Pembayaran Rekening Air</title>
+        </head>
+        <body>
+            <strong><center>Struk Pembayaran Rekening Air</center></strong>
+            <strong><center>HIPPAM Tirto Nur Abadi</center></strong>
+            <center>Dsn. Basekan - Ds. Banjarsari Wetan</center>
+            <center>Kec. Dagangan - Kab. Madiun</center>
+            <hr>
+            <br>
+            <br>
+            <table width="100%">
+                <tbody>
+                    <tr>
+                        <td width="20%">KODE METER</td>
+                        <td width="2%">:</td>
+                        <td width="30%">'.$data['tagihan']['pelanggan']['kodeMeter'].'</td>
+                        <td width="20%">GOL</td>
+                        <td width="2%">:</td>
+                        <td width="26%">'.$data['tagihan']['golongan']['namaGolongan'].'</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">NAMA</td>
+                        <td width="2%">:</td>
+                        <td width="30%">'.$data['tagihan']['pelanggan']['namaPelanggan'].'</td>
+                        <td width="20%">METER KINI</td>
+                        <td width="2%">:</td>
+                        <td width="26%">'.$data['tagihan']['jumlahMeter'].'</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">ALAMAT</td>
+                        <td width="2%">:</td>
+                        <td width="30%">'.$data['tagihan']['pelanggan']['alamat'].'</td>
+                    </tr>
+        
+                </tbody>
+        
+            </table>
+            <br>
+            <table width="100%">
+                <tbody>
+        
+                    <tr>
+                        <td width="20%">PERIODE</td>
+                        <td width="2%">:</td>
+                        <td width="30%">'.$data['tagihan']['bulan'].'</td>
+                        <td width="20%"></td>
+                        <td width="2%"></td>
+                        <td width="26%"></td>
+                    </tr>
+                    <tr>
+                        <td width="20%">TAGIHAN AIR</td>
+                        <td width="2%">:</td>
+                        <td width="30%">'.$data['subTotal'].'</td>
+                        <td width="20%"></td>
+                        <td width="2%"></td>
+                        <td width="26%"></td>
+                    </tr>
+        
+                </tbody>
+            </table>
+            <br>
+            <table width="100%">
+                <tbody>
+        
+                    <tr>
+                        <td width="20%">TOTAL TAGIHAN</td>
+                        <td width="2%">:</td>
+                        <td width="30%">'.$data['subTotal'].'</td>
+                        <td width="20%"></td>
+                        <td width="2%"></td>
+                        <td width="26%"></td>
+                    </tr>
+        
+                </tbody>
+            </table>
+        </body>
+        </html>';
+
+        //$pdf = new PDF();
+        $pdf = PDF::loadHTML($html);
+        $pdf->setPaper('a5', 'landscape');
+        $pdf->save(public_path('invoice/'.$nama_invoice));
+      
+      
+        $send_wa = Wablass::send_document([
+            'phone'=>$data->tagihan->pelanggan->noHP,
+            'document'=>asset('invoice/'.$nama_invoice),
+            'caption'=>'Struk Tagihan PDAM A/N '.$data->tagihan->pelanggan->namaPelanggan,
+        ]);
+        dd($send_wa);
+        $send_wa = json_decode($send_wa);
+      
+        if($send_wa->status == true){
+            return redirect()->back()->with(['success'=>'Berhasil mengirim ke whatsapp pelanggan']);
+        }else{
+            return redirect()->back()->with(['error'=>'Gagal Mengirim ke whatsapp pelanggan!']);
+        }
+       
+        
     }
 }

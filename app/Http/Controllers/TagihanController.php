@@ -20,9 +20,6 @@ class TagihanController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request);
-
-
         $tagihan = Tagihan::with('pelanggan');
 
         if(isset($request->dates)){
@@ -39,8 +36,6 @@ class TagihanController extends Controller
         $tagihan = $tagihan->orderby('idTagihan','desc')->get();
 
 
-        //$tagihan = Tagihan::paginate(10);
-        //$pelanggan = Pelanggan::paginate(10);
         return view ('tagihan.index', compact('tagihan'));
     }
 

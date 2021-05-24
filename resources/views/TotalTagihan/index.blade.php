@@ -42,8 +42,9 @@
                     <td>{{ $tag->tagihan->jumlahMeter }}</td>
                     <td>{{ $tag->subTotal }}</td>
                     <td>
-                        <a href="{{ url('/totaltagihan-pdf/'.$tag->idTotalTagihan) }}" target="_blank" rel="noopener noreferrer" class="on-default edit-row btn btn-primary" ><i class="fas fa-file-pdf"></i></a>
-
+                        <a href="{{ url('/totaltagihan-pdf/'.$tag->idTotalTagihan) }}" target="_blank" rel="noopener noreferrer" class="on-default edit-row btn btn-primary" ><i class="fas fa-file-pdf" title="Cetak PDF"></i></a>
+                        <a href="{{ url('/tagihanwa/'.$tag->idTotalTagihan) }}" title="Kirim data PDF ke whatsapp" rel="noopener noreferrer" class="on-default edit-row btn btn-primary" ><i class="
+                            fab fa-whatsapp"></i></a>
                     </td>
                     </tr>
                     @endforeach
