@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->integer('pegawai_id')->unsigned();
             $table->foreign('pegawai_id')->references('idPegawai')->on('pegawai')->onUpdate('cascade');
-            // $table->string('name');
+            $table->string('name');
             $table->string('password');
             $table->string('username');
             $table->rememberToken();

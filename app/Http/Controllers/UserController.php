@@ -43,6 +43,7 @@ class UserController extends Controller
         // dd($request->all());
         User::create([
             'pegawai_id' => $request->idPegawai,
+            'name' => $request->name,
             'username' => $request->username,
             'password' => Hash::make($request->password)
         ]);
@@ -85,6 +86,7 @@ class UserController extends Controller
         User::where('id', $id)
             ->update([
                 'pegawai_id' => $request->idPegawai,
+                'name' => $request->name,
                 'username' => $request->username,
                 'password' => Hash::make($request->password)
             ]);

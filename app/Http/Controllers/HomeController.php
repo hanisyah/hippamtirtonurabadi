@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pelanggan;
+use App\Golongan;
+use App\Pegawai;
+use App\Tagihan;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $pelanggan = Pelanggan::count();
+        $golongan = Golongan::count();
+        $pegawai = Pegawai::count();
+        $tagihan = Tagihan::count();
+        return view('home',compact('pelanggan','golongan','pegawai','tagihan'));
     }
 }

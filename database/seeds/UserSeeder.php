@@ -30,6 +30,7 @@ class UserSeeder extends Seeder
                 'pegawai_id'=>$pegawai->idPegawai,
                 'password'=>Hash::make('12345678'),
                 'username'=>'User'.$i,
+                'name'=>'Nama User'.$i,
             ]);
 
             $golongan = Golongan::create([
