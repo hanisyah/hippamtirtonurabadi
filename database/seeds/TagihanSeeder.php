@@ -13,9 +13,9 @@ class TagihanSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0;$i < 100;$i++){
+        for($i = 0;$i < 50;$i++){
             Tagihan::create([
-                'pelanggan_id'=>mt_rand(1,3),
+                'pelanggan_id'=>mt_rand(1,2),
                 'pegawai_id'=>1,
                 'golongan_id'=>1,
                 'tanggalCatat'=>Carbon::now(),

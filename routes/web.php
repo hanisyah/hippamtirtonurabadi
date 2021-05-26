@@ -39,5 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/totaltagihan','TotalTagihanController');
     Route::get('/totaltagihan-pdf/{idTotalTagihan}','TotalTagihanController@generatePDF');
     Route::get('/tagihanwa/{idTotalTagihan}','TotalTagihanController@sentToWhatsapp');
+    Route::get('/totalTagihan/{id}','TotalTagihanController@delete');
 });
 

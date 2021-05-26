@@ -96,7 +96,16 @@ class TotalTagihanController extends Controller
      */
     public function destroy(TotalTagihan $totalTagihan)
     {
-        //
+        //dd($totalTagihan);
+        //TotalTagihan::where('idTotalTagihan',$totalTagihan->idTotalTagihan)->delete();
+        TotalTagihan::destroy($totalTagihan->idTotalTagihan);
+        return redirect('/totaltagihan')->with(['success' => 'Data Total Tagihan Berhasil Dihapus!']);
+    }
+
+    public function delete($id)
+    {
+        TotalTagihan::where('idTotalTagihan',$id)->delete();
+        return redirect('/totaltagihan')->with(['success' => 'Data Total Tagihan Berhasil Dihapus!']);
     }
 
     // Cetak Tagihan
@@ -157,14 +166,14 @@ class TotalTagihanController extends Controller
                         <td width="2%">:</td>
                         <td width="30%">'.$data['tagihan']['pelanggan']['alamat'].'</td>
                     </tr>
-        
+
                 </tbody>
-        
+
             </table>
             <br>
             <table width="100%">
                 <tbody>
-        
+
                     <tr>
                         <td width="20%">PERIODE</td>
                         <td width="2%">:</td>
@@ -181,13 +190,13 @@ class TotalTagihanController extends Controller
                         <td width="2%"></td>
                         <td width="26%"></td>
                     </tr>
-        
+
                 </tbody>
             </table>
             <br>
             <table width="100%">
                 <tbody>
-        
+
                     <tr>
                         <td width="20%">TOTAL TAGIHAN</td>
                         <td width="2%">:</td>
@@ -196,7 +205,7 @@ class TotalTagihanController extends Controller
                         <td width="2%"></td>
                         <td width="26%"></td>
                     </tr>
-        
+
                 </tbody>
             </table>
         </body>
@@ -206,8 +215,8 @@ class TotalTagihanController extends Controller
         $pdf = PDF::loadHTML($html);
         $pdf->setPaper('a5', 'landscape');
         $pdf->save(public_path('invoice/'.$nama_invoice));
-      
-      
+
+
         $send_wa = Wablass::send_document([
             'phone'=>$data->tagihan->pelanggan->noHP,
             'document'=>asset('invoice/'.$nama_invoice),
@@ -215,13 +224,13 @@ class TotalTagihanController extends Controller
         ]);
         dd($send_wa);
         $send_wa = json_decode($send_wa);
-      
+
         if($send_wa->status == true){
             return redirect()->back()->with(['success'=>'Berhasil mengirim ke whatsapp pelanggan']);
         }else{
             return redirect()->back()->with(['error'=>'Gagal Mengirim ke whatsapp pelanggan!']);
         }
-       
-        
+
+
     }
 }

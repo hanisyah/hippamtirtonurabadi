@@ -87,37 +87,40 @@ class TagihanController extends Controller
         return response()->json($response, 201);
     }
 
-    public function index() {
-        /*$tagihan = Tagihan::all();
-        $namaGolongan = Golongan::where('idGolongan', $tagihan[0]['golongan_id'])->first();
-        $tagihan['namaGolongan'] = $namaGolongan->namaGolongan;
-        $kodeMeter = Pelanggan::where('idPelanggan', $tagihan[0]['pelanggan_id'])->first();
-        $tagihan['kodeMeter'] = $kodeMeter->kodeMeter;
-        $namaPelanggan = Pelanggan::where('idPelanggan', $tagihan[0]['pelanggan_id'])->first();
-        $tagihan['namaPelanggan'] = $namaPelanggan->namaPelanggan;
-        $namaPegawai = Pegawai::where('idPegawai', $tagihan[0]['pegawai_id'])->first();
-        $tagihan['namaPegawai'] = $namaPegawai->namaPegawai;
-        return response()->json([$tagihan]);*/
+    public function index($pegawai_id) {
+
         $tagihan = DB::table('tagihan')
-            ->select('tagihan.*', 'golongan.namaGolongan', 'pelanggan.*')
+            ->select('tagihan.*', 'golongan.namaGolongan', 'pelanggan.kodeMeter', 'pelanggan.namaPelanggan', 'pegawai.namaPegawai')
             ->join('golongan', 'golongan.idGolongan', '=', 'tagihan.golongan_id')
             ->join('pelanggan', 'pelanggan.idPelanggan', '=', 'tagihan.pelanggan_id')
+            ->join('pegawai', 'pegawai.idPegawai', '=', 'tagihan.pegawai_id')
+            ->where('tagihan.pegawai_id', $pegawai_id)
             ->get();
 
-        return response()->json([$tagihan]);
+        return response()->json($tagihan);
     }
 
     public function edit(Request $request){
-        $tagihan = Tagihan::where('idTagihan', $request->idTagihan)->first();
-        $namaGolongan = Golongan::where('idGolongan', $tagihan['golongan_id'])->first();
-        $tagihan['namaGolongan'] = $namaGolongan->namaGolongan;
-        $kodeMeter = Pelanggan::where('idPelanggan', $tagihan['pelanggan_id'])->first();
-        $tagihan['kodeMeter'] = $kodeMeter->kodeMeter;
-        $namaPelanggan = Pelanggan::where('idPelanggan', $tagihan['pelanggan_id'])->first();
-        $tagihan['namaPelanggan'] = $namaPelanggan->namaPelanggan;
-        $namaPegawai = Pegawai::where('idPegawai', $tagihan['pegawai_id'])->first();
-        $tagihan['namaPegawai'] = $namaPegawai->namaPegawai;
+        error_reporting(-1);
+        ini_set('display_errors', 'On');
+        $nm = $request->fotoMeteran;
 
-        return response()->json([$tagihan]);
+        $tagihan_sebelumnya = Tagihan::orderBy('idTagihan','desc')->where('pelanggan_id',$request->idPelanggan)->take(1)->get()[0];
+
+        $tagihan = Tagihan::where('idTagihan', $request -> idTagihan)->first();
+        $tagihan->pelanggan_id = $request->idPelanggan;
+        $tagihan->pegawai_id = $request->idPegawai;
+        $tagihan->golongan_id = $request->idGolongan;
+        $tagihan->tahun = $request->tahun;
+        $tagihan->bulan = $request->bulan;
+        $tagihan->tanggalCatat = $request->tanggalCatat;
+        $tagihan->jumlahMeter = $request->jumlahMeter;
+        $tagihan->jumlah_meter_kemarin = $tagihan_sebelumnya->jumlahMeter;
+        $tagihan->fotoMeteran = $nm;
+        $tagihan->save();
+
+        $response["success"] = 1;
+        return response()->json($response, 201);
+
     }
 }

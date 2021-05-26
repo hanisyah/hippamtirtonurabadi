@@ -20,7 +20,7 @@ class LoginController extends Controller
             if(password_verify($requset->password, $user->password)){
                 return response()->json([
                     'success' => 1,
-                    'message' => 'Selamat datang '.$user->username,
+                    'message' => 'Selamat datang '.$user->name,
                     'user' => $user->username,
                     'pegawai_id' => $user->pegawai_id,
                     'namaPegawai' => $user['namaPegawai']

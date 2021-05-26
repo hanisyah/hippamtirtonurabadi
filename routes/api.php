@@ -21,5 +21,5 @@ Route::post('login', 'Api\LoginController@login');
 Route::post('pelanggan', 'Api\PelangganController@index');
 Route::post('tagihan', 'Api\TagihanController@add');
 Route::post('uploadImage', 'Api\TagihanController@uploadImage');
-Route::get('tampiltagihan', 'Api\TagihanController@index');
+Route::get('tampiltagihan/{pegawai_id}', 'Api\TagihanController@index');
 Route::post('edittagihan', 'Api\TagihanController@edit');
