@@ -55,7 +55,7 @@
 		    <tr>
 				<td width="20%">TAGIHAN AIR</td>
 				<td width="2%">:</td>
-				<td width="30%">{{ $data['subTotal'] }}</td>
+				<td width="30%">Rp. {{ $data['subTotal'] }}</td>
 				<td width="20%"></td>
 				<td width="2%"></td>
 				<td width="26%"></td>
@@ -70,7 +70,7 @@
 		    <tr>
 				<td width="20%">TOTAL TAGIHAN</td>
 				<td width="2%">:</td>
-				<td width="30%">{{ $data['subTotal'] }}</td>
+				<td width="30%">Rp. {{ $data['subTotal'] }}</td>
 				<td width="20%"></td>
 				<td width="2%"></td>
 				<td width="26%"></td>
