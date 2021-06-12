@@ -6,7 +6,7 @@
             <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Update Data Pelanggan</h4>
+                    <h4>Update Data User</h4>
                 </div>
                 <div class="card-body">
 
@@ -15,37 +15,28 @@
                     @method('patch')
                     <input type="hidden" name="id" id="id">
                     <div class="form-group row mb-4">
+                        <input type="hidden" name="pegawai_id" value="{{$user->pegawai->idPegawai}}">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Pegawai</label>
                         <div class="col-sm-12 col-md-7">
-                            {{-- <input type="text" class="form-control" id="namaPelanggan" name="namaPelanggan" value="{{ $pelanggan->namaPelanggan }}" required> --}}
-                            <select class="form-control" placeholder="-- Select Nama Pegawai --" id="idPegawai" name="idPegawai"  required>
-                                <option value selected="selected">-- Pilih Nama Pegawai --</option>
-                                @foreach ($pegawai as $pgw)
-                                    <option value="{{$pgw->idPegawai}}"
-                                    @if ($pgw->idPegawai == $user->pegawai_id)
-                                        selected
-                                    @endif
-                                    >{{$pgw->namaPegawai}}</option>
-                                @endforeach
-                            </select>
+                            <input class="form-control" id="name" name="nama_pegawai" disabled placeholder="Nama user" value="{{$user->pegawai->namaPegawai}}">
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="{{ $user->username }}" required>
+                            <input type="text" class="form-control" autocomplete="off" id="username" name="username" placeholder="Username" value="{{ $user->username }}" >
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password</label>
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Ganti Password (opsional)</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="password" name="password" placeholder="Password" value="{{ $user->password }}" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="">
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nama" value="{{ $user->name }}" required>
+                            <input type="text" class="form-control" autocomplete="off" id="name" name="name" placeholder="Nama" value="{{ $user->name }}" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">

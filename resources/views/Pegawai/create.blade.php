@@ -14,20 +14,20 @@
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Pegawai</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="namaPegawai" name="namaPegawai" placeholder="Nama Pegawai">
+                            <input type="text" class="form-control" autocomplete="off" id="namaPegawai" name="namaPegawai" placeholder="Nama Pegawai">
 
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat">
+                            <input type="text" class="form-control" autocomplete="off" id="alamat" name="alamat" placeholder="Alamat">
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No HP</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="noHP" name="noHP" placeholder="No HP">
+                            <input type="text" class="form-control" autocomplete="off" id="noHP" name="noHP" placeholder="No HP">
                         </div>
                     </div>
                     <div class="form-group row mb-4">

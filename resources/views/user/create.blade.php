@@ -26,19 +26,19 @@
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                            <input type="text" class="form-control" autocomplete="off" id="username" name="username" placeholder="Username">
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="password" name="password" placeholder="Password">
+                            <input type="text" class="form-control" autocomplete="off" id="password" name="password" placeholder="Password">
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nama">
+                            <input type="text" class="form-control" autocomplete="off" id="name" name="name" placeholder="Nama">
                         </div>
                     </div>
                     <div class="form-group row mb-4">

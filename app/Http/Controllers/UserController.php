@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Pegawai;
+use Validator;
 
 class UserController extends Controller
 {
@@ -69,9 +70,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        $pegawai = Pegawai::all();
-        return view('user.update', compact('user','pegawai'));
+        $user = User::with('pegawai')->find($id);
+
+        return view('user.update', compact('user'));
     }
 
     /**
@@ -83,13 +84,40 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        User::where('id', $id)
+        $validator = Validator::make($request->all(),[
+                // validasi
+                'pegawai_id'=>'required',
+                'name'=>'required',
+                'username'=>'required',
+            ],[
+                // pesan error ditampilkan saat validasi gagal
+            'pegawai_id.required'=>'Harap pilih pegawai',
+            'name.required'=>'Harap masukkann nama',
+            'username.required'=>'Harap masukkan username',
+            ]);
+
+        // mengembalikan pesan error ke halaman
+        if($validator->fails()){
+            return redirect()->back()->with(['error'=>$validator->errors()->first()]);
+        }
+
+        //cek apakah di request nya ada passsowrd nya dan passwordnya tidak kosong , apabilsa konsisi terpenuhi maka jalankan script
+        if(!empty($request->password)){
+            User::where('id', $id)
             ->update([
-                'pegawai_id' => $request->idPegawai,
+                'pegawai_id' => $request->pegawai_id,
                 'name' => $request->name,
                 'username' => $request->username,
                 'password' => Hash::make($request->password)
             ]);
+        }else{
+            User::where('id', $id)
+            ->update([
+                'pegawai_id' => $request->pegawai_id,
+                'name' => $request->name,
+                'username' => $request->username,
+            ]);
+        }
         return redirect('/user')->with(['success' => 'Data User Berhasil Diubah!']);
     }
 

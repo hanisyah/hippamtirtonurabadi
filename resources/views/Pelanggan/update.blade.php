@@ -17,31 +17,31 @@
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Pelanggan</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="namaPelanggan" name="namaPelanggan" value="{{ $pelanggan->namaPelanggan }}" required>
+                            <input type="text" class="form-control" autocomplete="off" id="namaPelanggan" name="namaPelanggan" value="{{ $pelanggan->namaPelanggan }}" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="{{ $pelanggan->alamat }}" required>
+                            <input type="text" class="form-control" autocomplete="off" id="alamat" name="alamat" placeholder="Alamat" value="{{ $pelanggan->alamat }}" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No HP</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="noHP" name="noHP" placeholder="No HP" value="{{ $pelanggan->noHP }}" required>
+                            <input type="number" class="form-control" autocomplete="off" id="noHP" name="noHP" placeholder="No HP" value="{{ $pelanggan->noHP }}" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tanggal Pasang</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="date" class="form-control" id="tanggalPasang" name="tanggalPasang" value="{{ $pelanggan->tanggalPasang }}" required>
+                            <input type="date" class="form-control" autocomplete="off" id="tanggalPasang" name="tanggalPasang" value="{{ $pelanggan->tanggalPasang }}" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kode Meteran</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="kodeMeter" name="kodeMeter" placeholder="Kode Meteran" value="{{ $pelanggan->kodeMeter }}" required>
+                            <input type="text" class="form-control" autocomplete="off" id="kodeMeter" name="kodeMeter" placeholder="Kode Meteran" value="{{ $pelanggan->kodeMeter }}" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">

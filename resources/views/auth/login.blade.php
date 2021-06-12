@@ -43,7 +43,7 @@
                   </div> --}}
                   <div class="form-group">
                     <label for="username">{{ __('Username') }}</label>
-                    <input id="username"  type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" tabindex="1" required autofocus>
+                    <input  id="username"  type="text" class="form-control autocomplete="off" @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" tabindex="1" required autofocus>
                     @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -55,7 +55,7 @@
                       <label for="password" class="control-label">{{ __('Password') }}</label>
 
                     </div>
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" tabindex="2" required>
+                    <input id="password" type="password" class="form-control autocomplete="off" @error('password') is-invalid @enderror" name="password" tabindex="2" required>
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">

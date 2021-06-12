@@ -15,21 +15,21 @@
                     @method('patch')
                     <input type="hidden" name="idGolongan" id="idGolongan">
                     <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">kode</label>
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kode</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode" value="{{ $golongan->kode }}" required>
+                            <input type="text" class="form-control" autocomplete="off" id="kode" name="kode" placeholder="Kode" value="{{ $golongan->kode }}" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Golongan</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="text" class="form-control" id="namaGolongan" name="namaGolongan" value="{{ $golongan->namaGolongan }}" required>
+                            <input type="text" class="form-control" autocomplete="off" id="namaGolongan" name="namaGolongan" value="{{ $golongan->namaGolongan }}" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tarif</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="number" class="form-control" id="tarif" name="tarif" placeholder="Tarif" value="{{ $golongan->tarif }}" required>
+                            <input type="number" class="form-control" autocomplete="off" id="tarif" name="tarif" placeholder="Tarif" value="{{ $golongan->tarif }}" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
