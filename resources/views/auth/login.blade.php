@@ -8,14 +8,14 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>Admin HIPPAM Tirto Nur Abadi</title>
   <!-- General CSS Files -->
-  <link rel="stylesheet" href="otika/assets/css/app.min.css">
-  <link rel="stylesheet" href="otika/assets/bundles/bootstrap-social/bootstrap-social.css">
+  <link rel="stylesheet" href="{{url('otika/assets/css/app.min.css')}}">
+  <link rel="stylesheet" href="{{url('otika/assets/bundles/bootstrap-social/bootstrap-social.css')}}">
   <!-- Template CSS -->
-  <link rel="stylesheet" href="otika/assets/css/style.css">
-  <link rel="stylesheet" href="otika/assets/css/components.css">
+  <link rel="stylesheet" href="{{url('otika/assets/css/style.css')}}">
+  <link rel="stylesheet" href="{{url('otika/assets/css/components.css')}}">
   <!-- Custom style CSS -->
-  <link rel="stylesheet" href="otika/assets/css/custom.css">
-  <link rel='shortcut icon' type='image/x-icon' href='otika/assets/img/water.ico' />
+  <link rel="stylesheet" href="{{url('otika/assets/css/custom.css')}}">
+  <link rel='shortcut icon' type='image/x-icon' href="{{url('otika/assets/img/water.ico')}}" />
 </head>
 
 <body>
@@ -32,18 +32,22 @@
               <div class="card-body">
                 <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
                   @csrf
-                  {{-- <div class="form-group">
-                    <label for="email">{{ __('E-Mail Address') }}</label>
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" tabindex="1" required autofocus>
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                  </div> --}}
+
+                    <!-- KETIKA ADA SESSION ERROR  -->
+                   @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><em>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    </em>
+                    </div>
+                    @endif
                   <div class="form-group">
                     <label for="username">{{ __('Username') }}</label>
-                    <input  id="username"  type="text" class="form-control autocomplete="off" @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" tabindex="1" required autofocus>
+                    <input  id="username"  type="text" class="form-control" autocomplete="off" @error('username') is-invalid @enderror name="username" value="{{ old('username') }}" tabindex="1" required autofocus>
                     @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -55,7 +59,7 @@
                       <label for="password" class="control-label">{{ __('Password') }}</label>
 
                     </div>
-                    <input id="password" type="password" class="form-control autocomplete="off" @error('password') is-invalid @enderror" name="password" tabindex="2" required>
+                    <input id="password" type="password" class="form-control" autocomplete="off" @error('password') is-invalid @enderror name="password" tabindex="2" required>
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -77,13 +81,13 @@
     </section>
   </div>
   <!-- General JS Scripts -->
-  <script src="otika/assets/js/app.min.js"></script>
+  <script src="{{url('otika/assets/js/app.min.js')}}"></script>
   <!-- JS Libraies -->
   <!-- Page Specific JS File -->
   <!-- Template JS File -->
-  <script src="otika/assets/js/scripts.js"></script>
+  <script src="{{url('otika/assets/js/scripts.js')}}"></script>
   <!-- Custom JS File -->
-  <script src="otika/assets/js/custom.js"></script>
+  <script src="{{url('otika/assets/js/custom.js')}}"></script>
 </body>
 
 
