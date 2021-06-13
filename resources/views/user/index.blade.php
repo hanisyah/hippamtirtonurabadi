@@ -20,7 +20,7 @@
             </div>
 
             <div style="text-align:right; margin-right:10px">
-                <a href="/user/create" class="on-default btn btn-success" ><i class="fa fa-plus-circle"> Add Data</i> </a>
+                <a href="/user/create" class="on-default btn btn-success" ><i class="fa fa-plus-circle"> Tambah Data</i> </a>
             </div>
 
             <div class="card-body">
