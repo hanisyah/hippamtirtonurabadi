@@ -223,22 +223,45 @@
   <script src="{{url('otika/assets/bundles/datatables/export-tables/pdfmake.min.js')}}"></script>
   <script src="{{url('otika/assets/bundles/datatables/export-tables/vfs_fonts.js')}}"></script>
   <script src="{{url('otika/assets/bundles/datatables/export-tables/buttons.print.min.js')}}"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
   <script src="{{url('otika/assets/js/page/datatables.js')}}"></script>
+  <!-- Daterangepicker -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <!-- Sweetalert -->
+  <!-- JS Libraies -->
+  <script src="{{url('otika/assets/bundles/sweetalert/sweetalert.min.js')}}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{{url('otika/assets/js/page/sweetalert.js')}}"></script>
+
   <!-- Template JS File -->
   <script src="{{url('otika/assets/js/scripts.js')}}"></script>
   <!-- Custom JS File -->
   <script src="{{url('otika/assets/js/custom.js')}}"></script>
-  @yield('js')
-    {{-- <script>
-        var loadFile = function(event) {
-            var output = document.getElementById('output');
-            output.src = URL.createObjectURL(event.target.files(0));
-        }
 
-    </script> --}}
+
+<script>
+    $(".swal-6").click(function (e) {
+    var id = $(this).attr('data-id');
+    swal({
+        title: 'Yakin hapus data?',
+        text: 'Data yang sudah dihapus tidak dapat dikembalikan!',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+        if (willDelete) {
+            // swal('Poof! Your imaginary file has been deleted!', {
+            // icon: 'success',
+            // });
+            $(`#delete${id}`).submit();
+        } else {
+            // swal('Your imaginary file is safe!');
+        }
+        });
+    });
+</script>
+
 </body>
 
 

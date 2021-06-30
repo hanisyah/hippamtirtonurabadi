@@ -46,11 +46,18 @@
                             <td>{{ $pgw->noHP }}</td>
                             <td>
                                 <a href="{{ url('/pegawai/'.$pgw->idPegawai.'/edit') }}" class="on-default edit-row btn btn-warning" ><i class="far fa-edit"></i></a>
-                                <form action="{{ url('/pegawai/'.$pgw->idPegawai) }}" method="post" class="d-inline">
+                                <a href="#" class="btn btn-danger swal-6" data-id="{{ $pgw->idPegawai }}">
+                                    <form action="{{ url('/pegawai/'.$pgw->idPegawai) }}" id="delete{{ $pgw->idPegawai }}" method="post" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                    </form>
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                                {{-- <form action="{{ url('/pegawai/'.$pgw->idPegawai) }}" method="post" class="d-inline">
                                     @method('delete')
                                     @csrf
-                                    <button class="on-default edit-row btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus nya?');" ><i class="fa fa-trash"></i></button>
-                                </form>
+                                    <button class="on-default edit-row btn btn-danger" id="swal-6" ><i class="fa fa-trash"></i></button>
+                                </form> --}}
                             </td>
                             </tr>
                             @endforeach
@@ -64,3 +71,4 @@
     </div>
 </section>
 @endsection
+

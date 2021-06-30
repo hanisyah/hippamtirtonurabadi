@@ -53,10 +53,17 @@
                         <a href="{{ url('/totaltagihan-pdf/'.$tag->idTotalTagihan) }}" target="_blank" rel="noopener noreferrer" class="on-default edit-row btn btn-primary" ><i class="fas fa-file-pdf" title="Cetak PDF"></i></a>
                         <a href="{{ url('/tagihanwa/'.$tag->idTotalTagihan) }}" title="Kirim data PDF ke whatsapp" rel="noopener noreferrer" class="on-default edit-row btn btn-success" ><i class="
                             fab fa-whatsapp"></i></a>
-                        <form action="{{ url('/totalTagihan/'.$tag->idTotalTagihan) }}" method="get" class="d-inline">
+                        <a href="#" class="btn btn-danger swal-6" data-id="{{ $tag->idTotalTagihan }}">
+                            <form action="{{ url('/totalTagihan/'.$tag->idTotalTagihan) }}" id="delete{{ $tag->idTotalTagihan }}" method="post" class="d-inline">
+                                @method('delete')
+                                @csrf
+                            </form>
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        {{-- <form action="{{ url('/totalTagihan/'.$tag->idTotalTagihan) }}" method="get" class="d-inline">
 
                             <button class="on-default edit-row btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus nya?');" ><i class="fa fa-trash"></i></button>
-                        </form>
+                        </form> --}}
                     </td>
                     </tr>
                     @endforeach

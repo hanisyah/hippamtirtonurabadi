@@ -58,12 +58,19 @@
                     </td>
                     <td>{{ $tag->pegawai->namaPegawai }}</td>
                     <td>
+                        <a href="#" class="btn btn-danger swal-6" data-id="{{ $tag->idTagihan }}">
+                            <form action="{{ url('/tagihan/'.$tag->idTagihan) }}" id="delete{{ $tag->idTagihan }}" method="post" class="d-inline">
+                                @method('delete')
+                                @csrf
+                            </form>
+                            <i class="fa fa-trash"></i>
+                        </a>
                         {{-- <a href="{{ url('/tagihan/'.$tag->idTagihan.'/edit') }}" class="on-default edit-row btn btn-primary" ><i class="fa fa-edit"></i></a> --}}
-                        <form action="{{ url('/tagihan/'.$tag->idTagihan) }}" method="post" class="d-inline">
+                        {{-- <form action="{{ url('/tagihan/'.$tag->idTagihan) }}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
                         <button class="on-default edit-row btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus nya?');" ><i class="fa fa-trash"></i></button>
-                        </form>
+                        </form> --}}
                     </td>
                     </tr>
                     @endforeach

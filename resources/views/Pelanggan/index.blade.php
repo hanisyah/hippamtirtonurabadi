@@ -52,11 +52,18 @@
                             <td>{{ $plgn->golongan->namaGolongan }}</td>
                             <td>
                                 <a href="{{ url('/pelanggan/'.$plgn->idPelanggan.'/edit') }}" class="on-default edit-row btn btn-warning" ><i class="far fa-edit"></i></a>
-                                <form action="{{ url('/pelanggan/'.$plgn->idPelanggan) }}" method="post" class="d-inline">
+                                <a href="#" class="btn btn-danger swal-6" data-id="{{ $plgn->idPelanggan }}">
+                                    <form action="{{ url('/pelanggan/'.$plgn->idPelanggan) }}" id="delete{{ $plgn->idPelanggan }}" method="post" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                    </form>
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                                {{-- <form action="{{ url('/pelanggan/'.$plgn->idPelanggan) }}" method="post" class="d-inline">
                                     @method('delete')
                                     @csrf
                                     <button class="on-default edit-row btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus nya?');" ><i class="fa fa-trash"></i></button>
-                                </form>
+                                </form> --}}
                                 <a href="{{ url('https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='.$plgn->idPelanggan) }}" target="_blank" rel="noopener noreferrer" class="on-default edit-row btn btn-info" ><i class="far fa-newspaper"></i></a>
                             </td>
                             </tr>

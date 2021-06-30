@@ -33,11 +33,18 @@
                     <td>{{ $gol->tarif }}</td>
                     <td>
                         <a href="{{ url('/golongan/'.$gol->idGolongan.'/edit') }}" class="on-default edit-row btn btn-warning" ><i class="far fa-edit"></i></a>
-                        <form action="{{ url('/golongan/'.$gol->idGolongan) }}" method="post" class="d-inline">
+                        <a href="#" class="btn btn-danger swal-6" data-id="{{ $gol->idGolongan }}">
+                            <form action="{{ url('/golongan/'.$gol->idGolongan) }}" id="delete{{ $gol->idGolongan }}" method="post" class="d-inline">
+                                @method('delete')
+                                @csrf
+                            </form>
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        {{-- <form action="{{ url('/golongan/'.$gol->idGolongan) }}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
                         <button class="on-default edit-row btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus nya?');" ><i class="fa fa-trash"></i></button>
-                        </form>
+                        </form> --}}
                     </td>
                     </tr>
                 @endforeach

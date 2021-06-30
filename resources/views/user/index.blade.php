@@ -46,11 +46,18 @@
                     {{-- <td>{{ $usr->password }}</td> --}}
                     <td>
                         <a href="{{ url('/user/'.$usr->id.'/edit') }}" class="on-default edit-row btn btn-warning" ><i class="far fa-edit"></i></a>
-                        <form action="{{ url('/user/'.$usr->id) }}" method="post" class="d-inline">
+                        <a href="#" class="btn btn-danger swal-6" data-id="{{ $usr->id }}">
+                            <form action="{{ url('/user/'.$usr->id) }}" id="delete{{ $usr->id }}" method="post" class="d-inline">
+                                @method('delete')
+                                @csrf
+                            </form>
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        {{-- <form action="{{ url('/user/'.$usr->id) }}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
                             <button class="on-default edit-row btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus nya?');" ><i class="fa fa-trash"></i></button>
-                        </form>
+                        </form> --}}
                     </td>
                     </tr>
                     @endforeach
