@@ -6,7 +6,7 @@ class Wablass
     public function __construct()
     {
         $this->api_key      = env('WABLASS_API_KEY','');
-        $this->url_endpoint = 'https://india.wablas.com/api';
+        $this->url_endpoint = 'https://us.wablas.com/api';
     }
 
     public function curl($endpoint,$data,$httpGet = false)

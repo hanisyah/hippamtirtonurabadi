@@ -1,6 +1,14 @@
 @extends('master')
 @section('content')
 
+@if (session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -42,7 +50,7 @@
                     <td>{{ $tag->tahun }}</td>
                     <td>{{ $tag->bulan }}</td>
                     <td>{{ Carbon\Carbon::parse($tag->tanggalCatat)->translatedFormat('l, d F Y') }}</td>
-                    <td>{{ $tag->jumlah_meter_kemarin }}</td>
+                    <td>{{ $tag->jumlahMeterKemarin }}</td>
                     <td>{{ $tag->jumlahMeter }}</td>
                     <td>
                         {{-- <img src="{{ asset ( $tag->fotoMeteran ) }}" width="100"> --}}

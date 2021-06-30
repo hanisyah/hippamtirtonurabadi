@@ -1,6 +1,14 @@
 @extends('master')
 @section('content')
 
+@if (session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -38,7 +46,7 @@
                     <td>{{ $tag->tagihan->tahun }}</td>
                     <td>{{ $tag->tagihan->bulan }}</td>
                     <td>{{ $tag->tagihan->golongan->tarif }}</td>
-                    <td>{{ $tag->tagihan->jumlah_meter_kemarin }}</td>
+                    <td>{{ $tag->tagihan->jumlahMeterKemarin }}</td>
                     <td>{{ $tag->tagihan->jumlahMeter }}</td>
                     <td>{{ $tag->subTotal }}</td>
                     <td>

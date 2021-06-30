@@ -118,7 +118,7 @@ class TotalTagihanController extends Controller
               ->with('pegawai');
         }])->where('idTotalTagihan',$idTotalTagihan)->first();
 
-        $pdf = PDF::loadView('TotalTagihan/strukPDF', ['data' => $data])->setPaper('a5', 'landscape');
+        $pdf = PDF::loadView('totaltagihan/strukPDF', ['data' => $data])->setPaper('a5', 'landscape');
         return $pdf->stream();
     }
 
@@ -185,7 +185,7 @@ class TotalTagihanController extends Controller
                     <tr>
                         <td width="20%">TAGIHAN AIR</td>
                         <td width="2%">:</td>
-                        <td width="30%">'.$data['subTotal'].'</td>
+                        <td width="30%">Rp. '.$data['subTotal'].'</td>
                         <td width="20%"></td>
                         <td width="2%"></td>
                         <td width="26%"></td>
@@ -200,7 +200,7 @@ class TotalTagihanController extends Controller
                     <tr>
                         <td width="20%">TOTAL TAGIHAN</td>
                         <td width="2%">:</td>
-                        <td width="30%">'.$data['subTotal'].'</td>
+                        <td width="30%">Rp. '.$data['subTotal'].'</td>
                         <td width="20%"></td>
                         <td width="2%"></td>
                         <td width="26%"></td>
@@ -220,9 +220,9 @@ class TotalTagihanController extends Controller
         $send_wa = Wablass::send_document([
             'phone'=>$data->tagihan->pelanggan->noHP,
             'document'=>asset('invoice/'.$nama_invoice),
-            'caption'=>'Struk Tagihan PDAM A/N '.$data->tagihan->pelanggan->namaPelanggan,
+            'caption'=>'Struk Tagihan HIPPAM A/N '.$data->tagihan->pelanggan->namaPelanggan,
         ]);
-        dd($send_wa);
+        // dd($send_wa);
         $send_wa = json_decode($send_wa);
 
         if($send_wa->status == true){

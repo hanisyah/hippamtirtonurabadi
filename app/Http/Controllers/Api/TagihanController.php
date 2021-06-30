@@ -58,7 +58,7 @@ class TagihanController extends Controller
             $tagihan->bulan = $request->bulan;
             $tagihan->tanggalCatat = $request->tanggalCatat;
             $tagihan->jumlahMeter = $request->jumlahMeter;
-            $tagihan->jumlah_meter_kemarin = $tagihan_sebelumnya->jumlahMeter;
+            $tagihan->jumlahMeterKemarin = $tagihan_sebelumnya->jumlahMeter;
             $tagihan->fotoMeteran = $nm;
             $tagihan->save();
 
@@ -115,7 +115,7 @@ class TagihanController extends Controller
         $tagihan->bulan = $request->bulan;
         $tagihan->tanggalCatat = $request->tanggalCatat;
         $tagihan->jumlahMeter = $request->jumlahMeter;
-        $tagihan->jumlah_meter_kemarin = $tagihan_sebelumnya->jumlahMeter;
+        $tagihan->jumlahMeterKemarin = $tagihan_sebelumnya->jumlahMeter;
         $tagihan->fotoMeteran = $nm;
         $tagihan->save();
 

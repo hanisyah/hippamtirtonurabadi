@@ -22,7 +22,7 @@ class TagihanSeeder extends Seeder
                 'tahun'=>'2021',
                 'bulan'=>'April',
                 'jumlahMeter'=>'1232',
-                'jumlah_meter_kemarin'=>1000,
+                'jumlahMeterKemarin'=>1000,
                 'fotoMeteran'=>'1621735409835.png'
             ]);
         }
