@@ -61,42 +61,26 @@
             </a>
           </div>
           <ul class="sidebar-menu">
-            {{-- <li class="menu-header">Main</li> --}}
-            <li class="dropdown">
+            <li class="dropdown {{Request::is('home') ? 'active':''}}">
               <a href="{{url('/home/')}}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
 
-            {{-- <li class="menu-header">Master Data</li> --}}
-            {{-- <li class="dropdown">
-              <a href="{{url('/pegawai/')}}" class="nav-link"><i data-feather="monitor"></i><span>Data Pegawai</span></a>
-            </li> --}}
-
-            {{-- <li class="menu-header">Data</li> --}}
-            <li class="dropdown">
+            <li class="dropdown {{ Request::is('pegawai') ? 'active':'' }} || {{ Request::is('golongan') ? 'active':'' }} || {{Request::is('pelanggan') ? 'active':''}} || {{Request::is('user') ? 'active':''}}">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Master Data</span></a>
               <ul class="dropdown-menu">
-                {{-- <li><a class="nav-link" href="{{url('/petugas/')}}">Data Petugas</a></li> --}}
-                <li><a class="nav-link" href="{{url('/pegawai/')}}">Data Pegawai</a></li>
-                <li><a class="nav-link" href="{{url('/golongan/')}}">Data Golongan</a></li>
-                <li><a class="nav-link" href="{{url('/pelanggan/')}}">Data Pelanggan</a></li>
-                <li><a class="nav-link" href="{{url('/user/')}}">Data User</a></li>
+                <li class="{{Request::is('pegawai') ? 'active':''}}"><a class="nav-link" href="{{url('/pegawai/')}}">Data Pegawai</a></li>
+                <li class="{{Request::is('golongan') ? 'active':''}}"><a class="nav-link" href="{{url('/golongan/')}}">Data Golongan</a></li>
+                <li class="{{Request::is('pelanggan') ? 'active':''}}"><a class="nav-link" href="{{url('/pelanggan/')}}">Data Pelanggan</a></li>
+                <li class="{{Request::is('user') ? 'active':''}}"><a class="nav-link" href="{{url('/user/')}}">Data User</a></li>
               </ul>
             </li>
 
-            {{-- <li class="menu-header">Report</li> --}}
-            <li class="dropdown">
+            <li class="dropdown {{Request::is('tagihan') ? 'active':''}}">
               <a href="{{url('/tagihan/')}}" class="nav-link"><i data-feather="briefcase"></i><span>Tagihan</span></a>
             </li>
-            <li class="dropdown">
+            <li class="dropdown {{Request::is('totaltagihan') ? 'active':''}}">
               <a href="{{url('/totaltagihan/')}}" class="nav-link"><i data-feather="dollar-sign"></i><span>Total Tagihan</span></a>
             </li>
-            {{-- <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="layout"></i><span>Laporan</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="forms-advanced-form.html">Laporan Masuk</a></li>
-                <li><a class="nav-link" href="forms-editor.html">Laporan Keluar</a></li>
-              </ul>
-            </li> --}}
           </ul>
         </aside>
       </div>
