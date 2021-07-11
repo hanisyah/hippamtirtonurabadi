@@ -14,7 +14,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawai = Pegawai::all();
+        $pegawai = Pegawai::all()->SortByDesc('idPegawai');
         return view ('pegawai.index', compact('pegawai'));
     }
 

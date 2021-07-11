@@ -58,8 +58,9 @@ class UserSeeder extends Seeder
         $user = User::create([
             'pegawai_id'=>$pegawai->idPegawai,
             'password'=>Hash::make('password'),
-            'username'=>'admin',
-            'name'=>'Admin',
+            'username'=>'superadmin',
+            'level'=>'superadmin',
+            'name'=>'Super Admin',
         ]);
 
         $golongan = Golongan::create([

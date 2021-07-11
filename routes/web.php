@@ -27,7 +27,7 @@ Route::get('/tes',function(){
 
 Route::get('/', 'RedirectIfAuthenticatedController');
 Auth::routes();
-Route::middleware(['auth'])->group(function () {
+Route::group(['Ceklevel' => 'superadmin'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     // Route::resource('/petugas','PetugasController');
     Route::resource('/pegawai','PegawaiController');
@@ -35,6 +35,24 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pelanggan/{pelanggan}/qrcode','PelangganController@qrcode');
     Route::resource('/golongan','GolonganController');
     Route::resource('/tagihan','TagihanController');
+    Route::post('/tagihan/get-data','TagihanController@getDataPelanggan');
+    Route::resource('/user','UserController');
+    Route::resource('/totaltagihan','TotalTagihanController');
+    Route::get('/totaltagihan-pdf/{idTotalTagihan}','TotalTagihanController@generatePDF');
+    Route::get('/tagihanwa/{idTotalTagihan}','TotalTagihanController@sentToWhatsapp');
+    Route::get('/totalTagihan/{id}','TotalTagihanController@delete');
+});
+
+
+Route::group(['Ceklevel' => 'admin'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    // Route::resource('/petugas','PetugasController');
+    Route::resource('/pegawai','PegawaiController');
+    Route::resource('/pelanggan','PelangganController');
+    Route::post('/pelanggan/{pelanggan}/qrcode','PelangganController@qrcode');
+    Route::resource('/golongan','GolonganController');
+    Route::resource('/tagihan','TagihanController');
+    Route::post('/tagihan/get-data','TagihanController@getDataPelanggan');
     Route::resource('/user','UserController');
     Route::resource('/totaltagihan','TotalTagihanController');
     Route::get('/totaltagihan-pdf/{idTotalTagihan}','TotalTagihanController@generatePDF');

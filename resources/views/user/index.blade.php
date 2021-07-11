@@ -32,6 +32,7 @@
                     <th>Nama Pegawai</th>
                     <th>Username</th>
                     <th>Nama</th>
+                    <th>Level</th>
                     {{-- <th>Password</th> --}}
                     <th>Aksi</th>
                     </tr>
@@ -43,6 +44,7 @@
                     <td>{{ $usr->pegawai->namaPegawai }}</td>
                     <td>{{ $usr->username }}</td>
                     <td>{{ $usr->name }}</td>
+                    <td>{{ $usr->level }}</td>
                     {{-- <td>{{ $usr->password }}</td> --}}
                     <td>
                         <a href="{{ url('/user/'.$usr->id.'/edit') }}" class="on-default edit-row btn btn-warning" ><i class="far fa-edit"></i></a>

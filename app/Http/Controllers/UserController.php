@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $user = User::all()->SortByDesc('id');;
         $pegawai = Pegawai::all();
         return view ('user.index', compact('user','pegawai'));
     }
@@ -46,6 +46,7 @@ class UserController extends Controller
             'pegawai_id' => $request->idPegawai,
             'name' => $request->name,
             'username' => $request->username,
+            'level' => $request->level,
             'password' => Hash::make($request->password)
         ]);
         return redirect('/user')->with(['success' => 'Data User Berhasil Ditambahkan!']);
@@ -89,11 +90,13 @@ class UserController extends Controller
                 'pegawai_id'=>'required',
                 'name'=>'required',
                 'username'=>'required',
+                'level'=>'required',
             ],[
                 // pesan error ditampilkan saat validasi gagal
             'pegawai_id.required'=>'Harap pilih pegawai',
             'name.required'=>'Harap masukkann nama',
             'username.required'=>'Harap masukkan username',
+            'level.required'=>'Harap masukkan level',
             ]);
 
         // mengembalikan pesan error ke halaman
@@ -108,6 +111,7 @@ class UserController extends Controller
                 'pegawai_id' => $request->pegawai_id,
                 'name' => $request->name,
                 'username' => $request->username,
+                'level' => $request->level,
                 'password' => Hash::make($request->password)
             ]);
         }else{
@@ -116,6 +120,7 @@ class UserController extends Controller
                 'pegawai_id' => $request->pegawai_id,
                 'name' => $request->name,
                 'username' => $request->username,
+                'level' => $request->level,
             ]);
         }
         return redirect('/user')->with(['success' => 'Data User Berhasil Diubah!']);

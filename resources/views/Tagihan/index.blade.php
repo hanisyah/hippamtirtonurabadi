@@ -16,6 +16,12 @@
             <h4>Data Tagihan</h4>
             </div>
 
+            @if (auth()->user()->level=="superadmin")
+            <div style="text-align:right; margin-right:10px">
+                <a href="/tagihan/create" class="on-default btn btn-success" ><i class="fa fa-plus-circle"> Tambah Data</i> </a>
+            </div>
+            @endif
+
             <div class="card-body">
             <form action="{{url('/tagihan')}}" id="form_range" method="get">
                 <div class="form-group">

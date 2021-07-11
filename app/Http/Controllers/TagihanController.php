@@ -46,7 +46,11 @@ class TagihanController extends Controller
      */
     public function create()
     {
-        return view('tagihan.create');
+        $tagihan = Tagihan::all();
+        $pelanggan = Pelanggan::all();
+        $pegawai = Pegawai::all();
+        $golongan = Golongan::all();
+        return view('tagihan.create', compact('tagihan','pelanggan','pegawai','golongan'));
     }
 
     /**
@@ -57,7 +61,22 @@ class TagihanController extends Controller
      */
     public function store(Request $request)
     {
-        Tagihan::create($request->all());
+        $nm = $request->fotoMeteran;
+        $namaFile = time().rand(100,999).".".$nm->getClientOriginalExtension();
+
+        $tagihan = new Tagihan;
+        $tagihan->pelanggan_id = $request->idPelanggan;
+        $tagihan->pegawai_id = $request->idPegawai;
+        $tagihan->golongan_id = $request->idGolongan;
+        $tagihan->tanggalCatat = $request->tanggalCatat;
+        $tagihan->tahun = $request->tahun;
+        $tagihan->bulan = $request->bulan;
+        $tagihan->jumlahMeterKemarin = $request->jumlahMeterKemarin;
+        $tagihan->jumlahMeter = $request->jumlahMeter;
+        $tagihan->fotoMeteran = $namaFile;
+
+        $nm->move(public_path().'/img/', $namaFile);
+        $tagihan->save();
         return redirect('/tagihan')->with(['success' => 'Data Tagihan Berhasil Ditambahkan!']);
     }
 
@@ -152,6 +171,20 @@ class TagihanController extends Controller
     {
         Tagihan::destroy($tagihan->idTagihan);
         return redirect('/tagihan')->with(['success' => 'Data Tagihan Berhasil Dihapus!']);
+    }
+
+    public function getDataPelanggan(Request $request)
+    {
+        $pelanggan = Pelanggan::with('golongan')->where([
+            'idPelanggan' => $request->idPelanggan
+        ])->first();
+
+        $data['status'] = 'ok';
+        $data['result'] = array('kodeMeter' => $pelanggan->kodeMeter,
+                                'golongan_id' => $pelanggan->golongan_id,
+                                'namaGolongan' => $pelanggan->golongan->namaGolongan);
+
+        echo json_encode($data);
     }
 
 }

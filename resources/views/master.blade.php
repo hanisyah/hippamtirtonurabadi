@@ -12,6 +12,9 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{url('otika/assets/bundles/datatables/datatables.min.css')}}">
   <link rel="stylesheet" href="{{url('otika/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
+
+  <link rel="stylesheet" href="{{url('otika/assets/bundles/prism/prism.css')}}">
+
   <link rel="stylesheet" href="{{url('otika/assets/css/style.css')}}">
   <link rel="stylesheet" href="{{url('otika/assets/css/components.css')}}">
   <!-- Custom style CSS -->
@@ -36,7 +39,7 @@
         <ul class="navbar-nav navbar-right">
 
           <li class="dropdown"><a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{url('otika/assets/img/user.png')}}"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{url('otika/assets/img/water.ico')}}"
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
 
@@ -216,6 +219,8 @@
   <script src="{{url('otika/assets/bundles/sweetalert/sweetalert.min.js')}}"></script>
   <!-- Page Specific JS File -->
   <script src="{{url('otika/assets/js/page/sweetalert.js')}}"></script>
+
+  <script src="{{url('otika/assets/bundles/prism/prism.js')}}"></script>
 
   <!-- Template JS File -->
   <script src="{{url('otika/assets/js/scripts.js')}}"></script>

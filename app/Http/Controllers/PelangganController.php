@@ -15,7 +15,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $pelanggan = Pelanggan::all();
+        $pelanggan = Pelanggan::all()->SortByDesc('idPelanggan');
         $golongan = Golongan::all();
         return view ('pelanggan.index', compact('pelanggan','golongan'));
     }

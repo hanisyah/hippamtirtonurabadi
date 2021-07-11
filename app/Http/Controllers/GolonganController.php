@@ -14,7 +14,7 @@ class GolonganController extends Controller
      */
     public function index()
     {
-        $golongan = Golongan::all();
+        $golongan = Golongan::all()->SortByDesc('idGolongan');
         return view ('golongan.index', compact('golongan'));
     }
 
