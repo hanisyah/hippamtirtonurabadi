@@ -50,9 +50,11 @@ class UserSeeder extends Seeder
         // }
 
         $pegawai = Pegawai::create([
+            'kodePegawai'  => 'P111',
             'namaPegawai'=>'Adi',
             'alamat'=>'Basekan',
-            'noHp'=>'085784740025'
+            'noHp'=>'085784740025',
+            'email'=>'hanisyahadi4@gmail.com'
         ]);
 
         $user = User::create([
@@ -60,7 +62,6 @@ class UserSeeder extends Seeder
             'password'=>Hash::make('password'),
             'username'=>'superadmin',
             'level'=>'superadmin',
-            'name'=>'Super Admin',
         ]);
 
         $golongan = Golongan::create([

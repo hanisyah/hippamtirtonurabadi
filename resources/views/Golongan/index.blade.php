@@ -1,6 +1,17 @@
 @extends('master')
 @section('content')
 
+@if (session('success'))
+<!-- MAKA TAMPILKAN ALERT SUCCESS -->
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+
+<!-- KETIKA ADA SESSION ERROR  -->
+@if (session('error'))
+<!-- MAKA TAMPILKAN ALERT DANGER -->
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -30,7 +41,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $gol->kode }}</td>
                     <td>{{ $gol->namaGolongan }}</td>
-                    <td>{{ $gol->tarif }}</td>
+                    <td>Rp. {{ $gol->tarif }} /m<sup>3</sup></td>
                     <td>
                         <a href="{{ url('/golongan/'.$gol->idGolongan.'/edit') }}" class="on-default edit-row btn btn-warning" ><i class="far fa-edit"></i></a>
                         <a href="#" class="btn btn-danger swal-6" data-id="{{ $gol->idGolongan }}">

@@ -9,21 +9,18 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function login(Request $requset){
-        // return "User Controller Login";
-        // dd($requset->all());die();
-        $user = User::where('username', $requset->username)->first();
-        $namaPegawai = Pegawai::where('idPegawai', $user['pegawai_id'])->first();
-        $user['namaPegawai'] = $namaPegawai->namaPegawai;
+    public function login(Request $request){
+        $user = User::join('pegawai', 'pegawai.idPegawai', '=', 'users.pegawai_id')->where('kodePegawai', $request->kodePegawai)->first();
 
         if($user){
-            if(password_verify($requset->password, $user->password)){
+            if(password_verify($request->password, $user->password)){
                 return response()->json([
                     'success' => 1,
-                    'message' => 'Selamat datang '.$user->name,
-                    'user' => $user->username,
+                    'message' => 'Selamat datang '.$user->username,
+                    'username' => $user->username,
                     'pegawai_id' => $user->pegawai_id,
-                    'namaPegawai' => $user['namaPegawai']
+                    'kodePegawai' => $user->kodePegawai,
+                    'namaPegawai' => $user->namaPegawai
                 ]);
             }
             return $this->error('Password Salah');

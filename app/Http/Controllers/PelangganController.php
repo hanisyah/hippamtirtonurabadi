@@ -39,15 +39,20 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        Pelanggan::create([
-            'golongan_id' => $request->idGolongan,
-            'namaPelanggan' => $request->namaPelanggan,
-            'alamat' => $request->alamat,
-            'noHP' => $request->noHP,
-            'tanggalPasang' => $request->tanggalPasang,
-            'kodeMeter' => $request->kodeMeter
-        ]);
-        return redirect('/pelanggan')->with(['success' => 'Data Pelanggan Berhasil Ditambahkan!']);
+        $getPelanggan = Pelanggan::where('kodeMeter', '=', $request->kodeMeter)->first();
+        if($getPelanggan == null) {
+            Pelanggan::create([
+                'golongan_id' => $request->idGolongan,
+                'namaPelanggan' => $request->namaPelanggan,
+                'alamat' => $request->alamat,
+                'noHP' => $request->noHP,
+                'tanggalPasang' => $request->tanggalPasang,
+                'kodeMeter' => $request->kodeMeter
+            ]);
+            return redirect('/pelanggan')->with(['success' => 'Data Pelanggan Berhasil Ditambahkan!']);
+        } else {
+            return redirect('/pelanggan')->with(['error' => 'Kode Pelanggan Sudah Digunakan!']);
+        }
     }
 
     /**

@@ -133,20 +133,6 @@ class TagihanController extends Controller
         // $request->fotoMeteran->move(public_path().'/img/', $nm);
         // $tagihan->update($data);
 
-        $data = $request->except(['fotoMeteran']);
-
-        if ($request->hasFile('fotoMeteran')) {
-            $extension = $request->fotoMeteran->extension();
-            $filename = Uuid::uuid4() . ".{$extension}";
-            $oldfile = basename($tagihan->fotoMeteran);
-            Storage::delete("tagihan/{$oldfile}");
-            $request->fotoMeteran->storeAs('tagihan', $filename);
-            $data['fotoMeteran'] = asset("/storage/tagihan/{$filename}");
-        }
-
-        $tagihan->fill($data);
-        $tagihan->save();
-
         // Tagihan::where('idTagihan', $tagihan->idTagihan)
         //     ->update([
         //         'pelanggan_id' => $request->idPelanggan,

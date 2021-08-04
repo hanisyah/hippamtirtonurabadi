@@ -31,6 +31,7 @@ Route::group(['Ceklevel' => 'superadmin'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     // Route::resource('/petugas','PetugasController');
     Route::resource('/pegawai','PegawaiController');
+    Route::post('/pegawai/get-data','UserController@getDataPegawai');
     Route::resource('/pelanggan','PelangganController');
     Route::post('/pelanggan/{pelanggan}/qrcode','PelangganController@qrcode');
     Route::resource('/golongan','GolonganController');
@@ -48,6 +49,7 @@ Route::group(['Ceklevel' => 'admin'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     // Route::resource('/petugas','PetugasController');
     Route::resource('/pegawai','PegawaiController');
+    Route::post('/pegawai/get-data','UserController@getDataPegawai');
     Route::resource('/pelanggan','PelangganController');
     Route::post('/pelanggan/{pelanggan}/qrcode','PelangganController@qrcode');
     Route::resource('/golongan','GolonganController');

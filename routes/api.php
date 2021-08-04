@@ -23,3 +23,4 @@ Route::post('tagihan', 'Api\TagihanController@add');
 Route::post('uploadImage', 'Api\TagihanController@uploadImage');
 Route::get('tampiltagihan/{pegawai_id}', 'Api\TagihanController@index');
 Route::post('edittagihan', 'Api\TagihanController@edit');
+Route::post('forgotpassword','Api\ForgotpasswordController@forgotpassword');

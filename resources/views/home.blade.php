@@ -5,8 +5,8 @@
         <div class="card-body">
         <nav class="navbar bg-primary">
             <marquee direction="left" scrollamount="4" align="center"
-                class="navbar-brand" behavior="alternate">Selamat Datang  {{ Auth::user()->name }}!</marquee>
-            {{-- <a class="navbar-brand" href="#">Selamat Datang  {{ Auth::user()->name }}!</a> --}}
+                class="navbar-brand" behavior="alternate">Selamat Datang  {{ Auth::user()->username }}!</marquee>
+            {{-- <a class="navbar-brand" href="#">Selamat Datang  {{ Auth::user()->username }}!</a> --}}
         </nav>
         </div>
     </div>

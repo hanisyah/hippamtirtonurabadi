@@ -36,8 +36,14 @@ class GolonganController extends Controller
      */
     public function store(Request $request)
     {
-        Golongan::create($request->all());
-        return redirect('/golongan')->with(['success' => 'Data Golongan Berhasil Ditambahkan!']);
+        $getGolongan = Golongan::where('kode', '=', $request->kode)->first();
+        // dd($getGolongan);
+        if($getGolongan == null) {
+            Golongan::create($request->all());
+            return redirect('/golongan')->with(['success' => 'Data Golongan Berhasil Ditambahkan!']);
+        } else {
+            return redirect('/golongan')->with(['error' => 'Kode Golongan Sudah Digunakan!']);
+        }
     }
 
     /**

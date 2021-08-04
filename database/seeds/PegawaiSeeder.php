@@ -13,6 +13,7 @@ class PegawaiSeeder extends Seeder
     {
         \App\Pegawai::insert([
       [
+        'kodePegawai'  => 'P111',
         'namaPegawai'  => 'Adi',
         'alamat' => 'Basekan',
         'noHP'  => '081357948638',

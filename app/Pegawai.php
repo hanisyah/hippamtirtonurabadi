@@ -8,7 +8,7 @@ class Pegawai extends Model
 {
     protected $table = 'pegawai';
     protected $primaryKey = 'idPegawai';
-    protected $fillable = ['namaPegawai','alamat','noHP'];
+    protected $fillable = ['kodePegawai','namaPegawai','alamat','noHP','email'];
 
     public function tagihans(){
     	return $this->hasMany('App\Tagihan','pegawai_id');

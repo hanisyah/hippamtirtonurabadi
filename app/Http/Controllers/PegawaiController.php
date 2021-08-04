@@ -36,8 +36,13 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        Pegawai::create($request->all());
-        return redirect('/pegawai')->with(['success' => 'Data Pegawai Berhasil Ditambahkan!']);
+        $getPegawai = Pegawai::where('kodePegawai', '=', $request->kodePegawai)->first();
+        if($getPegawai == null) {
+            Pegawai::create($request->all());
+            return redirect('/pegawai')->with(['success' => 'Data Pegawai Berhasil Ditambahkan!']);
+        } else {
+            return redirect('/pegawai')->with(['error' => 'Kode Pegawai Sudah Digunakan!']);
+        }
     }
 
     /**
@@ -74,9 +79,11 @@ class PegawaiController extends Controller
     {
         Pegawai::where('idPegawai', $pegawai->idPegawai)
             ->update([
+                'kodePegawai' => $request->kodePegawai,
                 'namaPegawai' => $request->namaPegawai,
                 'alamat' => $request->alamat,
-                'noHP' => $request->noHP
+                'noHP' => $request->noHP,
+                'email' => $request->email
             ]);
         return redirect('/pegawai')->with(['success' => 'Data Pegawai Berhasil Diubah!']);
     }

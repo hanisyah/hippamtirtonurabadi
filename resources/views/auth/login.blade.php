@@ -59,7 +59,20 @@
                       <label for="password" class="control-label">{{ __('Password') }}</label>
 
                     </div>
-                    <input id="password" type="password" class="form-control" autocomplete="off" @error('password') is-invalid @enderror name="password" tabindex="2" required>
+                    {{-- <input id="password" type="password" class="form-control" autocomplete="off" @error('password') is-invalid @enderror name="password" tabindex="2" required> --}}
+                    <div class="input-group">
+                        <input id="password" type="password" class="form-control" autocomplete="off" @error('password') is-invalid @enderror name="password" tabindex="2" required>
+                        <div class="input-group-prepend">
+                          <div class="input-group-text" name="submit" id="show" onclick="ShowPassword()">
+                            <i class="fas fa-eye"></i>
+                          </div>
+                          <div class="input-group-text" style="display:none" id="hide" onclick="HidePassword()">
+                            <i class="fas fa-eye-slash"></i>
+                          </div>
+                          {{-- <input type="button" name="submit" value="SHOW PASSWORD" id="show" onclick="ShowPassword()">
+						    <input type="button" style="display:none" id="hide" value="Hide Password" onclick="HidePassword()"> --}}
+                        </div>
+                      </div>
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -80,6 +93,28 @@
       </div>
     </section>
   </div>
+
+    <script>
+        function ShowPassword()
+    {
+        if(document.getElementById("password").value!="")
+        {
+            document.getElementById("password").type="text";
+            document.getElementById("show").style.display="none";
+            document.getElementById("hide").style.display="block";
+        }
+    }
+
+    function HidePassword()
+    {
+        if(document.getElementById("password").type == "text")
+        {
+            document.getElementById("password").type="password"
+            document.getElementById("show").style.display="block";
+            document.getElementById("hide").style.display="none";
+        }
+    }
+    </script>
   <!-- General JS Scripts -->
   <script src="{{url('otika/assets/js/app.min.js')}}"></script>
   <!-- JS Libraies -->

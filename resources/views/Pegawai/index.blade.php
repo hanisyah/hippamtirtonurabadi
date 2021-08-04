@@ -25,9 +25,9 @@
                         <a href="/pegawai/create" class="on-default btn btn-success" ><i class="fa fa-plus-circle"> Tambah Data</i> </a>
                     </div>
 
-                    <div style="text-align:right; margin:10px">
+                    {{-- <div style="text-align:right; margin:10px">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal">Tambah Data Modal</button>
-                    </div>
+                    </div> --}}
 
                     <div class="card-body">
                     <div class="table-responsive">
@@ -35,9 +35,11 @@
                         <thead>
                             <tr>
                             <th>No</th>
+                            <th>Kode Pegawai</th>
                             <th>Nama</th>
                             <th>Alamat</th>
                             <th>No HP</th>
+                            <th>Email</th>
                             <th>Aksi</th>
                             </tr>
                         </thead>
@@ -45,12 +47,14 @@
                             @foreach($pegawai as $pgw)
                             <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $pgw->kodePegawai }}</td>
                             <td>{{ $pgw->namaPegawai }}</td>
                             <td>{{ $pgw->alamat }}</td>
                             <td>{{ $pgw->noHP }}</td>
+                            <td>{{ $pgw->email }}</td>
                             <td>
                                 <a href="{{ url('/pegawai/'.$pgw->idPegawai.'/edit') }}" class="on-default edit-row btn btn-warning" ><i class="far fa-edit"></i></a>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal-{{$pgw->idPegawai}}">Edit</button>
+                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal-{{$pgw->idPegawai}}">Edit</button> --}}
                                 <a href="#" class="btn btn-danger swal-6" data-id="{{ $pgw->idPegawai }}">
                                     <form action="{{ url('/pegawai/'.$pgw->idPegawai) }}" id="delete{{ $pgw->idPegawai }}" method="post" class="d-inline">
                                         @method('delete')
@@ -76,7 +80,7 @@
     </div>
 </section>
 <!-- tambah modal -->
-<div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+{{-- <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -108,12 +112,6 @@
                     <input type="text" class="form-control" autocomplete="off" id="noHP" name="noHP" placeholder="No HP">
                 </div>
             </div>
-            {{-- <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                <div class="col-sm-12 col-md-7">
-                <button class="btn btn-primary">Simpan</button>
-                </div>
-            </div> --}}
             <div class="modal-footer bg-whitesmoke br">
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -122,11 +120,11 @@
         </div>
     </div>
     </div>
-</div>
+</div> --}}
 
-@foreach($pegawai as $pgw)
+{{-- @foreach($pegawai as $pgw) --}}
 <!-- edit modal -->
-<div class="modal fade" id="editModal-{{$pgw->idPegawai}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+{{-- <div class="modal fade" id="editModal-{{$pgw->idPegawai}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -171,6 +169,6 @@
     </div>
     </div>
 </div>
-@endforeach
+@endforeach --}}
 @endsection
 

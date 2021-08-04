@@ -29,9 +29,9 @@
                 <thead>
                     <tr>
                     <th>No</th>
+                    <th>Kode Pegawai</th>
                     <th>Nama Pegawai</th>
                     <th>Username</th>
-                    <th>Nama</th>
                     <th>Level</th>
                     {{-- <th>Password</th> --}}
                     <th>Aksi</th>
@@ -41,9 +41,9 @@
                     @foreach($user as $usr)
                     <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>{{ $usr->pegawai->kodePegawai }}</td>
                     <td>{{ $usr->pegawai->namaPegawai }}</td>
                     <td>{{ $usr->username }}</td>
-                    <td>{{ $usr->name }}</td>
                     <td>{{ $usr->level }}</td>
                     {{-- <td>{{ $usr->password }}</td> --}}
                     <td>

@@ -27,7 +27,20 @@
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tarif</label>
                         <div class="col-sm-12 col-md-7">
-                            <input type="number" class="form-control" autocomplete="off" id="tarif" name="tarif" placeholder="Tarif" required>
+                            {{-- <input type="number" class="form-control" autocomplete="off" id="tarif" name="tarif" placeholder="Tarif" required> --}}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        Rp.
+                                    </div>
+                                </div>
+                                <input type="number" class="form-control" autocomplete="off" id="tarif" name="tarif" placeholder="Tarif" required>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        /m<sup>3</sup>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row mb-4">

@@ -41,38 +41,43 @@ class TagihanController extends Controller
 
         try{
             $golongan = Golongan::where('idGolongan',$request->idGolongan)->first();
-
             $tagihan_sebelumnya = Tagihan::orderBy('idTagihan','desc')->where('pelanggan_id',$request->idPelanggan)->take(1)->get()[0];
-
-
             $jumlah_meter = $request->jumlahMeter - $tagihan_sebelumnya->jumlahMeter;
-
             $nominal_tagihan = $golongan->tarif * $jumlah_meter;
 
+            $getTagihan = Tagihan::where('tahun', '=', $request->tahun)->where('bulan', '=', $request->bulan)->first();
+            if($getTagihan == null){
 
-            $tagihan = new Tagihan;
-            $tagihan->pelanggan_id = $request->idPelanggan;
-            $tagihan->pegawai_id = $request->idPegawai;
-            $tagihan->golongan_id = $request->idGolongan;
-            $tagihan->tahun = $request->tahun;
-            $tagihan->bulan = $request->bulan;
-            $tagihan->tanggalCatat = $request->tanggalCatat;
-            $tagihan->jumlahMeter = $request->jumlahMeter;
-            $tagihan->jumlahMeterKemarin = $tagihan_sebelumnya->jumlahMeter;
-            $tagihan->fotoMeteran = $nm;
-            $tagihan->save();
+                $tagihan = new Tagihan;
+                $tagihan->pelanggan_id = $request->idPelanggan;
+                $tagihan->pegawai_id = $request->idPegawai;
+                $tagihan->golongan_id = $request->idGolongan;
+                $tagihan->tahun = $request->tahun;
+                $tagihan->bulan = $request->bulan;
+                $tagihan->tanggalCatat = $request->tanggalCatat;
+                $tagihan->jumlahMeter = $request->jumlahMeter;
+                $tagihan->jumlahMeterKemarin = $tagihan_sebelumnya->jumlahMeter;
+                $tagihan->fotoMeteran = $nm;
+                $tagihan->save();
 
-            $total_tagihan = new TotalTagihan();
-            $total_tagihan->tagihan_id = $tagihan->idTagihan;
-            $total_tagihan->subTotal   = $nominal_tagihan;
-            $total_tagihan->save();
+                $total_tagihan = new TotalTagihan();
+                $total_tagihan->tagihan_id = $tagihan->idTagihan;
+                $total_tagihan->subTotal   = $nominal_tagihan;
+                $total_tagihan->save();
 
-            $response["success"] = 1;
-            return response()->json($response, 201);
+                $response["success"] = 1;
+                return response()->json($response, 201);
+
+            }else{
+                $response["success"] = 0;
+                $response["message"] = "Data sudah pernah diinput!";
+                return response()->json($response, 201);
+            }
         }catch(\Exception $e){
             \Log::error($e);
             $response["success"] = 0;
-            return response()->json($response, 500);
+            $response["message"] = "Data gagal diinput!";
+            return response()->json($response, 201);
         }
 
     }

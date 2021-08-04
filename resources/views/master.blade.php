@@ -6,7 +6,11 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Admin HIPPAM Tirto Nur Abadi</title>
+  @if (auth()->user()->level=="superadmin")
+    <title>Super Admin HIPPAM Tirto Nur Abadi</title>
+  @else
+    <title>Admin HIPPAM Tirto Nur Abadi</title>
+  @endif
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{url('otika/assets/css/app.min.css')}}">
   <!-- Template CSS -->
@@ -71,9 +75,15 @@
             <li class="dropdown {{ Request::is('pegawai') ? 'active':'' }} || {{ Request::is('golongan') ? 'active':'' }} || {{Request::is('pelanggan') ? 'active':''}} || {{Request::is('user') ? 'active':''}}">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Master Data</span></a>
               <ul class="dropdown-menu">
+
                 <li class="{{Request::is('pegawai') ? 'active':''}}"><a class="nav-link" href="{{url('/pegawai/')}}">Data Pegawai</a></li>
+
+                @if (auth()->user()->level=="admin")
                 <li class="{{Request::is('golongan') ? 'active':''}}"><a class="nav-link" href="{{url('/golongan/')}}">Data Golongan</a></li>
+                @endif
+                @if (auth()->user()->level=="admin")
                 <li class="{{Request::is('pelanggan') ? 'active':''}}"><a class="nav-link" href="{{url('/pelanggan/')}}">Data Pelanggan</a></li>
+                @endif
                 <li class="{{Request::is('user') ? 'active':''}}"><a class="nav-link" href="{{url('/user/')}}">Data User</a></li>
               </ul>
             </li>
@@ -81,9 +91,11 @@
             <li class="dropdown {{Request::is('tagihan') ? 'active':''}}">
               <a href="{{url('/tagihan/')}}" class="nav-link"><i data-feather="briefcase"></i><span>Tagihan</span></a>
             </li>
+            @if (auth()->user()->level=="admin")
             <li class="dropdown {{Request::is('totaltagihan') ? 'active':''}}">
               <a href="{{url('/totaltagihan/')}}" class="nav-link"><i data-feather="dollar-sign"></i><span>Total Tagihan</span></a>
             </li>
+            @endif
           </ul>
         </aside>
       </div>
@@ -227,7 +239,7 @@
   <!-- Custom JS File -->
   <script src="{{url('otika/assets/js/custom.js')}}"></script>
 
-
+  @yield('js')
 <script>
     $(".swal-6").click(function (e) {
     var id = $(this).attr('data-id');

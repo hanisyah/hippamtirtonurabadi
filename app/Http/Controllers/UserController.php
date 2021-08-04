@@ -41,15 +41,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        User::create([
-            'pegawai_id' => $request->idPegawai,
-            'name' => $request->name,
-            'username' => $request->username,
-            'level' => $request->level,
-            'password' => Hash::make($request->password)
+        $request->validate([
+            // validasi
+            'idPegawai'=>'required',
+            'username'=>'required',
+            'password' => 'required|confirmed',
+            'level'=>'required',
         ]);
-        return redirect('/user')->with(['success' => 'Data User Berhasil Ditambahkan!']);
+
+        $getUser = User::where('pegawai_id', '=', $request->idPegawai)->first();
+        if($getUser == null) {
+            User::create([
+                'pegawai_id' => $request->idPegawai,
+                'username' => $request->username,
+                'level' => $request->level,
+                'password' => Hash::make($request->password)
+            ]);
+            return redirect('/user')->with(['success' => 'Data User Berhasil Ditambahkan!']);
+        } else {
+            return redirect('/user')->with(['error' => 'Data User Dengan Kode Pegawai Tersebut Sudah Ada!']);
+        }
     }
 
     /**
@@ -88,7 +99,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(),[
                 // validasi
                 'pegawai_id'=>'required',
-                'name'=>'required',
+                //'name'=>'required',
                 'username'=>'required',
                 'level'=>'required',
             ],[
@@ -109,7 +120,6 @@ class UserController extends Controller
             User::where('id', $id)
             ->update([
                 'pegawai_id' => $request->pegawai_id,
-                'name' => $request->name,
                 'username' => $request->username,
                 'level' => $request->level,
                 'password' => Hash::make($request->password)
@@ -118,7 +128,6 @@ class UserController extends Controller
             User::where('id', $id)
             ->update([
                 'pegawai_id' => $request->pegawai_id,
-                'name' => $request->name,
                 'username' => $request->username,
                 'level' => $request->level,
             ]);
@@ -136,5 +145,17 @@ class UserController extends Controller
     {
         User::destroy($id);
         return redirect('/user')->with(['success' => 'Data User Berhasil Dihapus!']);
+    }
+
+    public function getDataPegawai(Request $request)
+    {
+        $pegawai = Pegawai::where([
+            'idPegawai' => $request->idPegawai
+        ])->first();
+
+        $data['status'] = 'ok';
+        $data['result'] = array('kodePegawai' => $pegawai->kodePegawai);
+
+        echo json_encode($data);
     }
 }
